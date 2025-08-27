@@ -28,7 +28,7 @@ const TripFaqs: React.FC<TripFaqsProps> = ({ data }) => {
         return (
           <div
             key={key}
-            className="accordion-item border-b py-5 border-primary/50 border-dashed">
+            className="accordion-item border-b py-3 border-primary/50 border-dashed">
             <button
               onClick={() => toggle(index)}
               className="w-full font-bold text-lg flex justify-between items-center text-headings text-left"

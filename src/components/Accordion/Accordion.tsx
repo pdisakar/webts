@@ -24,17 +24,22 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
+  const isValid = (value?: string | null) =>
+    value !== undefined &&
+    value !== null &&
+    value !== 'null' &&
+    value !== 'undefined';
+
   return (
     <div className="accordion [&>*:nth-child(1)]:pt-0">
       {data.map((item, index) => {
-        if (!item.itinerary_title || item.itinerary_title === 'null')
-          return null;
+        if (!isValid(item.itinerary_title)) return null;
 
         const isActive = activeIndex === index;
 
         return (
           <div
-            key={item.id}
+            key={item.id ?? index}
             className="accordion-item border-b border-primary/50 border-dashed py-5">
             <button
               onClick={() => toggle(index)}
@@ -71,25 +76,23 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
                 transition: 'max-height 0.3s ease',
               }}
               className="accordion-content">
-              {item.itinerary_description &&
-                item.itinerary_description !== 'null' && (
-                  <article
-                    className="pt-2"
-                    dangerouslySetInnerHTML={{
-                      __html: item.itinerary_description,
-                    }}
-                  />
-                )}
+              {isValid(item.itinerary_description) && (
+                <article
+                  className="pt-2"
+                  dangerouslySetInnerHTML={{
+                    __html: item.itinerary_description!,
+                  }}
+                />
+              )}
 
-              {((item.duration && item.duration !== 'null') ||
-                (item.meals && item.meals !== 'null') ||
-                (item.accommodation && item.accommodation !== 'null') ||
-                (item.origin_elevation && item.origin_elevation !== 'null') ||
-                (item.destination_elevation &&
-                  item.destination_elevation !== 'null')) && (
+              {(isValid(item.duration) ||
+                isValid(item.meals) ||
+                isValid(item.accommodation) ||
+                isValid(item.origin_elevation) ||
+                isValid(item.destination_elevation)) && (
                 <div className="quick-info mt-4">
                   <ul className="flex items-center gap-4 flex-wrap px-3 py-2 [&>li]:flex [&>li]:gap-[6px] [&>li>span]:text-primary text-sm bg-primary/5 border border-border rounded-lg">
-                    {item.duration && item.duration !== 'null' && (
+                    {isValid(item.duration) && (
                       <li>
                         <svg
                           width="16"
@@ -105,24 +108,23 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
                       </li>
                     )}
 
-                    {item.origin_elevation &&
-                      item.origin_elevation !== 'null' && (
-                        <li>
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none">
-                            <use
-                              xlinkHref="./icons.svg#altitude"
-                              fill="currentColor"
-                            />
-                          </svg>
-                          Elevation: <span>{item.origin_elevation}m</span>
-                        </li>
-                      )}
+                    {isValid(item.origin_elevation) && (
+                      <li>
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none">
+                          <use
+                            xlinkHref="./icons.svg#altitude"
+                            fill="currentColor"
+                          />
+                        </svg>
+                        Elevation: <span>{item.origin_elevation}m</span>
+                      </li>
+                    )}
 
-                    {item.meals && item.meals !== 'null' && (
+                    {isValid(item.meals) && (
                       <li>
                         <svg
                           width="16"
@@ -138,7 +140,7 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
                       </li>
                     )}
 
-                    {item.accommodation && item.accommodation !== 'null' && (
+                    {isValid(item.accommodation) && (
                       <li>
                         <svg
                           width="16"
@@ -151,6 +153,23 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
                           />
                         </svg>
                         Accommodation: <span>{item.accommodation}</span>
+                      </li>
+                    )}
+
+                    {isValid(item.destination_elevation) && (
+                      <li>
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none">
+                          <use
+                            xlinkHref="./icons.svg#altitude"
+                            fill="currentColor"
+                          />
+                        </svg>
+                        Destination Elevation:{' '}
+                        <span>{item.destination_elevation}m</span>
                       </li>
                     )}
                   </ul>

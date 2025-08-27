@@ -65,7 +65,9 @@ const ExtraFaqs: React.FC<ExtraFaqsProps> = ({ data }) => {
           <div
             key={sectionKey}
             className="faq-section mb-8">
-            <h2 className="mb-4 text-2xl font-bold">{section.sectionTitle}</h2>
+            <div className="title">
+              <h4>{section.sectionTitle} </h4>
+            </div>
 
             {section.faqs.map((faq, faqIndex) => {
               const isActive = activeIndexes[sectionKey] === faqIndex;
@@ -74,7 +76,7 @@ const ExtraFaqs: React.FC<ExtraFaqsProps> = ({ data }) => {
               return (
                 <div
                   key={key}
-                  className="accordion-item border-b py-5 border-primary/50 border-dashed">
+                  className="accordion-item border-b py-4 border-primary/50 border-dashed">
                   <button
                     onClick={() => toggle(sectionKey, faqIndex)}
                     className="w-full font-bold text-lg flex justify-between items-center text-left"
