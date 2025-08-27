@@ -91,11 +91,18 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ limit, data }) => {
               blog={blog}
             />
           ))}
-          <li>
-            <PrimaryButton
-              href="/blog"
-              label="View All Blogs"
-            />
+          <li className="">
+            <p className=' text-sm leading-[160%] text-center'>
+              Set out on remarkable adventures with our Featured Holidays. From
+              serene beach retreats to enriching cultural explorations, every
+              destination is handpicked to create your ideal escape.
+            </p>
+            <div className="action-btn relative flex justify-center mt-5 after:absolute after:top-1/2 after:left-1/2 after:-translate-y-1/2 after:-translate-x-1/2 after:content-[''] after:w-full after:h-[1px] after:bg-dottedline after:-z-10">
+              <PrimaryButton
+                href="/blog"
+                label="View All Blogs"
+              />
+            </div>
           </li>
         </ul>
       </div>
