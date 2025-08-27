@@ -198,7 +198,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                     <li key={menu.id}>
                       <Link
                         href={`/${menu.item_slug}`}
-                        className="w-full block text-left font-bold hover:text-secondary"
+                        className="w-full block text-left font-bold hover:text-primary"
                         onClick={() => setIsMobileMenuOpen(false)}>
                         {menu.item_title}
                       </Link>
@@ -214,9 +214,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                   <li key={menu.id}>
                     <button
                       onClick={() => toggleMainAccordion(menu.item_title)}
-                      className="w-full flex justify-between items-center text-left font-bold hover:text-secondary">
+                      className="w-full flex justify-between items-center text-left font-bold hover:text-primary">
                       {menu.item_title}
-                      <span className="h-5 w-5 bg-primary/20 hover:bg-secondary/20 text-sm rounded-full flex items-center justify-center transition-transform duration-300">
+                      <span className="h-5 w-5 bg-primary/20 hover:bg-primary/20 text-sm rounded-full flex items-center justify-center transition-transform duration-300">
                         {expandedMainMenu === menu.item_title ? '-' : '+'}
                       </span>
                     </button>
@@ -234,9 +234,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                                       category.item_title
                                     )
                                   }
-                                  className="font-semibold w-full flex justify-between items-center text-left hover:text-secondary pl-2">
+                                  className="font-semibold w-full flex justify-between items-center text-left hover:text-primary pl-2">
                                   {category.item_title}
-                                  <span className="h-5 w-5 bg-primary/20 hover:bg-secondary/20 text-sm rounded-full flex items-center justify-center transition-transform duration-300">
+                                  <span className="h-5 w-5 bg-primary/20 hover:bg-primary/20 text-sm rounded-full flex items-center justify-center transition-transform duration-300">
                                     {expandedSubMenu[menu.item_title] ===
                                     category.item_title
                                       ? '-'
@@ -251,7 +251,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                                       <li key={item.id}>
                                         <Link
                                           href={`/${item.url_segment}`}
-                                          className="text-sm hover:text-secondary block py-1"
+                                          className="text-sm hover:text-primary block py-1"
                                           onClick={() =>
                                             setIsMobileMenuOpen(false)
                                           }>
@@ -269,7 +269,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                             <li key={category.id}>
                               <Link
                                 href={`/${category.url_segment}`}
-                                className="text-sm hover:text-secondary block py-1 pl-2"
+                                className="text-sm hover:text-primary block py-1 pl-2"
                                 onClick={() => setIsMobileMenuOpen(false)}>
                                 {category.item_title}
                               </Link>
