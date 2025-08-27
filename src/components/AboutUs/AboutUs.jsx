@@ -75,13 +75,13 @@ const AboutUs = ({ data }) => {
           </div>
         </div>
         <div className="about-us-media hidden lg:block relative ">
-          <figure className=" !bg-page-bg image-slot before:aspect-[628/560] w-full">
+          <figure className="image-slot before:aspect-[628/560] w-full">
             <Image
               src={aboutus1}
               alt="Hero"
               width={628}
               height={560}
-              className="object-cover"
+              className="object-cover bg-page-bg"
               sizes="(max-width: 628px) 100vw, 628px"
               fetchPriority="high"
             />
