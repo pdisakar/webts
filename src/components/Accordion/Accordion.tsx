@@ -10,7 +10,6 @@ export interface ItineraryItem {
   accommodation?: string | null;
   origin_elevation?: string | null;
   destination_elevation?: string | null;
-  travel_mode?: string | null;
 }
 
 interface AccordionProps {
@@ -87,8 +86,7 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
                 (item.accommodation && item.accommodation !== 'null') ||
                 (item.origin_elevation && item.origin_elevation !== 'null') ||
                 (item.destination_elevation &&
-                  item.destination_elevation !== 'null') ||
-                (item.travel_mode && item.travel_mode !== 'null')) && (
+                  item.destination_elevation !== 'null')) && (
                 <div className="quick-info mt-4">
                   <ul className="flex items-center gap-4 flex-wrap px-3 py-2 [&>li]:flex [&>li]:gap-[6px] [&>li>span]:text-primary text-sm bg-primary/5 border border-border rounded-lg">
                     {item.duration && item.duration !== 'null' && (
@@ -153,22 +151,6 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
                           />
                         </svg>
                         Accommodation: <span>{item.accommodation}</span>
-                      </li>
-                    )}
-
-                    {item.travel_mode && item.travel_mode !== 'null' && (
-                      <li>
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none">
-                          <use
-                            xlinkHref="./icons.svg#transport"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        Travel Mode: <span>{item.travel_mode}</span>
                       </li>
                     )}
                   </ul>

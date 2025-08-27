@@ -1,6 +1,7 @@
 import Accordion from '@/components/Accordion/Accordion';
 import PageBanner from '@/components/Banners/PageBanner';
 import TestimonialsCard from '@/components/Cards/TestimonialsCard/TestimonialsCard';
+import ExtraFaqs from '@/components/ExtraFaqs/ExtraFaqs';
 import TripFaqs from '@/components/TripFaqs/TripFaqs';
 import TripGallery from '@/components/TripGallery/TripGallery';
 import React from 'react';
@@ -110,6 +111,7 @@ export interface PackageData {
   carousel?: { content: CarouselContent[] };
   groupfaqs?: GroupFaq[];
   testimonials?: Testimonial[];
+  package_extra_faqs?: string;
 }
 
 export interface PackageProps {
@@ -118,7 +120,7 @@ export interface PackageProps {
 
 const Package: React.FC<PackageProps> = ({ packageData }) => {
   console.log(packageData);
-
+  
   return (
     <main className="package-details">
       {packageData.banner && <PageBanner banner={packageData.banner} />}
@@ -470,7 +472,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
               </div>
             )}
 
-            {packageData.banners && (
+            {packageData.banners?.length ? (
               <div
                 className="trip-gallery"
                 id="trip-gallery">
@@ -481,9 +483,9 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                   <TripGallery data={packageData.banners} />
                 </div>
               </div>
-            )}
+            ) : null}
 
-            {packageData.groupfaqs && (
+            {packageData.groupfaqs?.length ? (
               <div
                 className="trip-faqs"
                 id="package-faqs">
@@ -493,16 +495,26 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                   </div>
                   <TripFaqs
                     data={packageData.groupfaqs.map((faq, index) => ({
-                      id: index,
+                      id: index + 1,
                       question: faq.question || '',
                       answer: faq.answer || '',
                     }))}
                   />
                 </div>
               </div>
+            ) : null}
+
+            {packageData.package_extra_faqs && (
+              <div
+                className="trip-faqs"
+                id="package-faqs">
+                <div className="common-module">
+                  <ExtraFaqs data={packageData.package_extra_faqs} />
+                </div>
+              </div>
             )}
 
-            {packageData.testimonials && (
+            {packageData.testimonials?.length ? (
               <div
                 className="trip-testimonials"
                 id="testimonials">
@@ -520,7 +532,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                   </div>
                 </div>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
