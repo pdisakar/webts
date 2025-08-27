@@ -1,5 +1,6 @@
 import client from './network';
 
+// Used
 export async function getGlobalData() {
   return await client
     .get('/global')
@@ -9,6 +10,7 @@ export async function getGlobalData() {
     .catch(err => err);
 }
 
+// Used
 export async function getOptionsData() {
   return await client
     .get('/options')
@@ -18,6 +20,7 @@ export async function getOptionsData() {
     .catch(err => err);
 }
 
+// Used
 export async function getHomeData() {
   return await client
     .get('/homepage')
@@ -27,55 +30,13 @@ export async function getHomeData() {
     .catch(err => err);
 }
 
-export async function getPackage(query) {
+// Used
+export async function getArticle(query) {
   return await client
-    .get(`/packagecontent/${query}`)
+    .get(`/content/${query}`)
     .then(async res => {
       return res;
     })
     .catch(err => err);
 }
 
-export async function getContactPage() {
-  return await client
-    .get('/pagecontent/contactpage')
-    .then(async res => {
-      return res;
-    })
-    .catch(err => err);
-}
-
-export async function getBlogPage() {
-  return await client
-    .get(`/pagecontent/blogpage?_limit=6`)
-    .then(async res => {
-      return res;
-    })
-    .catch(err => err);
-}
-
-export async function getBlogBySlug(query) {
-  return await client
-    .get(`/blogcontent/${query}`)
-    .then(async res => {
-      return res;
-    })
-    .catch(err => err);
-}
-export async function getAllTestimonials() {
-  return await client
-    .get('/alltestimonials')
-    .then(async res => {
-      return res;
-    })
-    .catch(err => err);
-}
-
-export async function getAllBlog() {
-  return await client
-    .get(`/allblogs`)
-    .then(async res => {
-      return res;
-    })
-    .catch(err => err);
-}

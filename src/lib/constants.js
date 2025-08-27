@@ -1,5 +1,0 @@
-export const IMAGE_URL = 'https://fis-api.nepaladventureholiday.com/';
-export const BASE_URL = 'http://localhost:3000/';
-export const SITE_KEY = 'jo9vahe23wahv9pqiboiuq';
-export const PRODUCTION_SERVER =
-  'https://fis-api.nepaladventureholiday.com/api/v1/front';
