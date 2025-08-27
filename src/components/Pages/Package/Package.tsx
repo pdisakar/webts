@@ -1,7 +1,6 @@
 import Accordion from '@/components/Accordion/Accordion';
 import PageBanner from '@/components/Banners/PageBanner';
 import TestimonialsCard from '@/components/Cards/TestimonialsCard/TestimonialsCard';
-import ExtraFaqs from '@/components/ExtraFaqs/ExtraFaqs';
 import TripFaqs from '@/components/TripFaqs/TripFaqs';
 import TripGallery from '@/components/TripGallery/TripGallery';
 import React from 'react';
@@ -120,7 +119,7 @@ export interface PackageProps {
 
 const Package: React.FC<PackageProps> = ({ packageData }) => {
   console.log(packageData);
-  
+
   return (
     <main className="package-details">
       {packageData.banner && <PageBanner banner={packageData.banner} />}
@@ -485,31 +484,12 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
               </div>
             ) : null}
 
-            {packageData.groupfaqs?.length ? (
-              <div
-                className="trip-faqs"
-                id="package-faqs">
-                <div className="common-module">
-                  <div className="title">
-                    <h2>Trip FAQs</h2>
-                  </div>
-                  <TripFaqs
-                    data={packageData.groupfaqs.map((faq, index) => ({
-                      id: index + 1,
-                      question: faq.question || '',
-                      answer: faq.answer || '',
-                    }))}
-                  />
-                </div>
-              </div>
-            ) : null}
-
             {packageData.package_extra_faqs && (
               <div
                 className="trip-faqs"
                 id="package-faqs">
                 <div className="common-module">
-                  <ExtraFaqs data={packageData.package_extra_faqs} />
+                  <TripFaqs data={packageData.package_extra_faqs} />
                 </div>
               </div>
             )}
