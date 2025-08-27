@@ -1,10 +1,11 @@
 import { DM_Sans } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
+
 import './globals.scss';
 import { getGlobalData, getOptionsData } from '@/services/network_requests';
 
 import Header from '@/layouts/Header/Header';
 import Footer from '@/layouts/Footer/Footer';
-
 
 const dmSans = DM_Sans({
   variable: '--primary',
@@ -36,6 +37,17 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSans.variable} antialiased font-primary`}>
+        <NextTopLoader
+          color="#FFFFFF"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+        />
+
         <Header
           optionalData={optionsData}
           globalData={data}
