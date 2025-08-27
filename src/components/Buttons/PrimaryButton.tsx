@@ -1,7 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-const PrimaryButton = ({ href, label }) => {
+interface PrimaryButtonProps {
+  href: string;
+  label: string;
+}
+
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({ href, label }) => {
   return (
     <div className="button group">
       <Link
