@@ -2,9 +2,28 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
-import { IMAGE_URL } from '@/lib/constants';
 
-const BlogCard = ({ blog }) => {
+const IMAGE_URL = process.env.IMAGE_URL || '';
+
+interface BlogAuthor {
+  name?: string;
+}
+
+interface Blog {
+  id: string | number;
+  title: string;
+  urlinfo: { url_slug: string };
+  featured?: { full_path: string };
+  authors?: BlogAuthor[];
+  blog_date: string | Date;
+  [key: string]: any;
+}
+
+interface BlogCardProps {
+  blog: Blog;
+}
+
+const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
   return (
     <li className="blog-card flex h-full gap-6 items-center">
       <figure className="card-img h-full rounded-[4px]">

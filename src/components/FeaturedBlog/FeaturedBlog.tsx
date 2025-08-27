@@ -1,13 +1,32 @@
-'use client';
 import React from 'react';
-import PrimaryButton from '../Buttons/PrimaryButton';
 import BlogCard from '../Cards/BlogCard/BlogCard';
+import PrimaryButton from '../Buttons/PrimaryButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { IMAGE_URL } from '@/lib/constants';
 
-const FeaturedBlog = ({ limit, data }) => {
+const IMAGE_URL = process.env.IMAGE_URL || '';
+
+interface BlogAuthor {
+  name?: string;
+}
+
+interface Blog {
+  id: string | number;
+  title: string;
+  urlinfo: { url_slug: string };
+  featured?: { full_path: string };
+  authors?: BlogAuthor[];
+  blog_date: string | Date;
+  [key: string]: any;
+}
+
+interface FeaturedBlogProps {
+  limit: number;
+  data?: Blog[];
+}
+
+const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ limit, data }) => {
   if (!data || data.length === 0) return null;
 
   const [firstBlog, ...remainingBlogs] = data.slice(0, limit);
@@ -57,7 +76,7 @@ const FeaturedBlog = ({ limit, data }) => {
 
                 <div className="about-blog flex items-center gap-3 mt-[10px]">
                   <span className="blog-author capitalize font-semibold">
-                    {firstBlog.authors[0].name || 'Unknown Author'}
+                    {firstBlog.authors?.[0]?.name || 'Unknown Author'}
                   </span>
                   <span className="blog-date capitalize font-semibold">
                     {format(new Date(firstBlog.blog_date), 'dd MMM yyyy')}
