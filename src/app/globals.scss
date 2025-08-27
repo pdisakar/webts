@@ -79,13 +79,13 @@ article {
   }
 }
 
-/* custom scroll bar */
+/* custom scrollbar */
 .custom-scrollbar {
   overflow-y: auto;
 
   &::-webkit-scrollbar {
     width: 7px;
-    background-color: rgba(112, 144, 81, 0.05); /* #709051 with low opacity */
+    background-color: rgba(112, 144, 81, 0.05);
   }
 
   &::-webkit-scrollbar-track {
@@ -93,15 +93,16 @@ article {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(112, 144, 81, 0.3); /* scrollbar handle */
+    background-color: rgba(112, 144, 81, 0.3);
     border-radius: 4px;
     transition: background-color 0.3s ease;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(112, 144, 81, 0.7); /* darker on hover */
+    background-color: rgba(112, 144, 81, 0.7);
   }
 
+  /* This is correct for hiding buttons in the general custom-scrollbar */
   &::-webkit-scrollbar-button {
     display: none;
     height: 0;
@@ -109,19 +110,79 @@ article {
   }
 }
 
+article.custom-scrollbar {
+  max-height: 8rem;
+  line-height: 190%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    background: transparent;
+    transition: background-color 0.3s ease;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px; 
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(112, 144, 81, 0.3);
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+  }
+
+
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-button:start:decrement,
+  &::-webkit-scrollbar-button:end:increment {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+
+
+  &:hover {
+    scrollbar-color: rgba(112, 144, 81, 0.3) rgba(112, 144, 81, 0.05);
+
+    &::-webkit-scrollbar {
+      background-color: rgba(112, 144, 81, 0.05);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      opacity: 1;
+    }
+  }
+}
+
+
+
+
+
 /* image slot style */
 .image-slot {
   @apply relative z-10 overflow-hidden before:-z-10 block after:-z-10 before:block;
   @apply bg-primary/5;
   background-image: url('/logo.png');
   background-repeat: no-repeat;
-  background-size: 87.32px 110px;
+  background-size: 90px 87px;
   background-position: center;
   background-repeat: no-repeat;
 
   > img {
     @apply absolute w-full h-full bottom-0 object-cover;
   }
+}
+
+//hero section h1 style
+h1 {
+  @apply font-black text-headings text-center max-w-[1000px] mx-auto capitalize leading-[1.2];
+  font-size: clamp(1.75rem, 4vw + 0.5rem, 5rem);
 }
 
 //title h2 and span style

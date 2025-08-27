@@ -4,6 +4,9 @@ import FeaturedCategory from '@/components/FeaturedCategory/FeaturedCategory';
 import FeaturedPackages from '@/components/FeaturedPackages/FeaturedPackages';
 import AboutUs from '@/components/AboutUs/AboutUs';
 import BestSellingPackages from '@/components/BestSellingPackages/BestSellingPackages';
+import FeaturedTestimonials from '@/components/FeaturedTestimonials/FeaturedTestimonials';
+import FeaturedBlog from '@/components/FeaturedBlog/FeaturedBlog';
+
 
 const BASE_URL = process.env.BASE_URL;
 const IMAGE_URL = process.env.IMAGE_URL;
@@ -90,6 +93,14 @@ export default async function Home() {
       <BestSellingPackages
         data={data?.category_section_a}
         limit={3}
+      />
+      <FeaturedTestimonials
+        limit={3}
+        data={data?.featured_testimonials}
+      />
+      <FeaturedBlog
+        limit={3}
+        data={data?.featured_blogs}
       />
     </main>
   );
