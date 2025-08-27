@@ -1,15 +1,14 @@
 import { notFound } from 'next/navigation';
 import { getArticle } from '@/services/network_requests';
-// import Package from '@/components/Pages/Package/Package';
+import Package from '@/components/Pages/Package/Package';
 import Category from '@/components/Pages/Category/Category';
-// import Article from '@/components/Pages/Article/Article';
 import type { Metadata } from 'next';
 
 const siteUrl = `${process.env.CANONICAL_BASE}/`;
 
 interface PageParams {
   params: {
-    slug: string,
+    slug: string;
   };
 }
 
@@ -60,17 +59,9 @@ export default async function Slug({ params }: PageParams) {
 
   if (data.page_type === 'category') {
     return <Category categoryData={data.content} />;
-  } 
-  // else if (data.page_type === 'package') {
-  //   return (
-  //     <Package
-  //       packageData={data.content}
-  //       siteUrl={siteUrl}
-  //     />
-  //   );
-  // } else if (data.page_type === 'article') {
-  //   return <Article articleData={data.content} />;
-  // }
+  } else if (data.page_type === 'package') {
+    return <Package packageData={data.content} />;
+  }
 
   return <div>Page type not supported</div>;
 }
