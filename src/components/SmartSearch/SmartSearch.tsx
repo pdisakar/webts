@@ -15,7 +15,7 @@ interface OptionalData {
 
 interface SmartSearchProps {
   optionalData: OptionalData;
-  onClose?: () => void; // optional callback when search closes
+  onClose?: () => void; 
 }
 
 const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
@@ -24,7 +24,6 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
   const [filtered, setFiltered] = useState<PackageItem[]>([]);
   const [showSearch, setShowSearch] = useState(false);
 
-  // Lock body scroll when search is open
   useEffect(() => {
     if (showSearch) {
       document.body.classList.add('overflow-hidden');
@@ -62,7 +61,6 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
 
   return (
     <div className="smart-search">
-      {/* search icon button */}
       <div
         className="quick-search cursor-pointer"
         onClick={() => setShowSearch(true)}>

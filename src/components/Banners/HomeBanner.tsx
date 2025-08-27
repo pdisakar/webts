@@ -1,0 +1,35 @@
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import HomeSearch from '../HomeSearch/HomeSearch';
+
+interface HomeBannerProps {
+  optionalData: {
+    [key: string]: any;
+  };
+}
+
+const HomeBanner: React.FC<HomeBannerProps> = ({ optionalData }) => {
+  return (
+    <section className="hero-section px-0 md:px-6">
+      <figure className="image-slot before:aspect-[1856/750] w-full mx-auto">
+        <Image
+          src="/banner.png"
+          alt="Hero"
+          width={1856}
+          height={750}
+          className="object-cover bg-page-bg"
+          sizes="auto, (max-width: 1856px), 1856px"
+          fetchPriority="high"
+        />
+      </figure>
+      <div className="home-search bg-secondary rounded-b-[20px] hidden lg:block">
+        <div className="container py-6">
+          <HomeSearch optionalData={optionalData} />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HomeBanner;

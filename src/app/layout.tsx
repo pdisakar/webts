@@ -1,5 +1,5 @@
 import { DM_Sans } from 'next/font/google';
-import './globals.css';
+import './globals.scss';
 import { getGlobalData, getOptionsData } from '@/services/network_requests';
 
 import Header from '@/layouts/Header/Header';

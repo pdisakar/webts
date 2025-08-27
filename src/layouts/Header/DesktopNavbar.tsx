@@ -58,8 +58,8 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
   return (
     <nav
       ref={navRef}
-      className="container flex items-center justify-between">
-      <div className="flex">
+      className="container flex items-center justify-between bg-page-bg ">
+      <div className="flex text-headings">
         <Link
           href="/"
           className="navbar-brand text-[0] relative z-[11] max-w-[87.32px] max-h-[20px] block before:absolute before:-top-7 before:-right-7 before:-bottom-[120px] before:left-[-9999px] before:bg-page-bg before:rounded-br-[40px] before:-z-10 before:shadow-custom-shadow">
