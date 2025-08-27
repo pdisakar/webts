@@ -3,6 +3,8 @@ import './globals.scss';
 import { getGlobalData, getOptionsData } from '@/services/network_requests';
 
 import Header from '@/layouts/Header/Header';
+import Footer from '@/layouts/Footer/Footer';
+
 
 const dmSans = DM_Sans({
   variable: '--primary',
@@ -39,6 +41,7 @@ export default async function RootLayout({
           globalData={data}
         />
         {children}
+        <Footer globalData={data} />
       </body>
     </html>
   );
