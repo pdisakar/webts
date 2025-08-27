@@ -8,12 +8,18 @@ const platforms = [
   'linkedin',
   'pinterest',
   'tiktok',
-];
+] as const;
 
-const SocialMedia = ({ globalData }) => {
+type Platform = (typeof platforms)[number];
+
+interface SocialMediaProps {
+  globalData?: Partial<Record<Platform, string>> & { [key: string]: any };
+}
+
+const SocialMedia: React.FC<SocialMediaProps> = ({ globalData = {} }) => {
   return (
     <ul className="flex gap-[8px]">
-      {platforms?.map(platform => {
+      {platforms.map(platform => {
         const url = globalData[platform];
 
         const icon = (
