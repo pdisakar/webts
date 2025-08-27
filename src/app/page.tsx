@@ -1,8 +1,9 @@
 import { getHomeData, getOptionsData } from '@/services/network_requests';
 import HomeBanner from '@/components/Banners/HomeBanner';
 import FeaturedCategory from '@/components/FeaturedCategory/FeaturedCategory';
+import FeaturedPackages from '@/components/FeaturedPackages/FeaturedPackages';
 
-interface FeaturedCategoryItem {
+export interface FeaturedCategoryItem {
   id: string | number;
   title: string;
   all_packages: number;
@@ -12,12 +13,23 @@ interface FeaturedCategoryItem {
   [key: string]: any;
 }
 
-interface HomeData {
-  featured_categories?: FeaturedCategoryItem[];
+export interface FeaturedPackage {
+  package_title: string;
+  package_duration: number;
+  total_testimonials: number;
+  group_default_price: number;
+  urlinfo: { url_slug: string };
+  featured: { full_path: string };
   [key: string]: any;
 }
 
-interface OptionsData {
+export interface HomeData {
+  featured_categories?: FeaturedCategoryItem[];
+  featured_packages?: FeaturedPackage[];
+  [key: string]: any;
+}
+
+export interface OptionsData {
   [key: string]: any;
 }
 
@@ -34,6 +46,10 @@ export default async function Home() {
       <FeaturedCategory
         data={data?.featured_categories || []}
         limit={4}
+      />
+      <FeaturedPackages
+        limit={3}
+        data={data?.featured_packages || []}
       />
     </main>
   );
