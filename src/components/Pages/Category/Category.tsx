@@ -20,22 +20,24 @@ export default function Category({ categoryData }: CategoryProps) {
     <div className="category-details">
       {categoryData.banner && <PageBanner banner={categoryData.banner} />}
 
-      <div className="common-box">
-        <div className="container">
-          <div className="title text-center">
-            <h2
-              className="common-module mb-0"
-              dangerouslySetInnerHTML={{ __html: categoryData.title }}></h2>
-          </div>
+      {categoryData.description && (
+        <div className="common-box">
+          <div className="container">
+            <div className="title text-center">
+              <h2
+                className="common-module mb-0"
+                dangerouslySetInnerHTML={{ __html: categoryData.title }}></h2>
+            </div>
 
-          {categoryData.description && (
-            <article
-              className="text-center mx-auto"
-              dangerouslySetInnerHTML={{ __html: categoryData.description }}
-            />
-          )}
+            {categoryData.description && (
+              <article
+                className="text-center mx-auto"
+                dangerouslySetInnerHTML={{ __html: categoryData.description }}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {categoryData.children && categoryData.children.length > 0 && (
         <div className="package-list-container bg-secondary/10">
@@ -66,9 +68,9 @@ export default function Category({ categoryData }: CategoryProps) {
           <div className="common-box">
             <div className="container">
               <div className="title text-center">
-                <h2>Available Packages</h2>
+                <h2>{categoryData.title}</h2>
                 <div className="flex items-center gap-2 mx-auto justify-center text-[15px] text-primary">
-                  <p className="text-bold">{categoryData.title}: </p>
+                  <p className="text-bold">Available Packages: </p>
                   <p>{categoryData.packages.length} Packages</p>
                 </div>
               </div>
