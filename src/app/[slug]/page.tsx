@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { getArticle } from '@/services/network_requests';
 import Package from '@/components/Pages/Package/Package';
 import Category from '@/components/Pages/Category/Category';
+import Article from '@/components/Pages/Article/Article';
+
 import type { Metadata } from 'next';
 
 const siteUrl = `${process.env.CANONICAL_BASE}/`;
@@ -15,7 +17,7 @@ interface PageParams {
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const { slug } = await params; 
+  const { slug } = await params;
   const articleResponse = await getArticle(slug);
   const data = articleResponse?.data?.data;
 
@@ -62,6 +64,8 @@ export default async function Slug({ params }: PageParams) {
     return <Category categoryData={data.content} />;
   } else if (data.page_type === 'package') {
     return <Package packageData={data.content} />;
+  } else if (data.page_type === 'article') {
+    return <Article articleData={data.content} />;
   }
 
   return <div>Page type not supported</div>;
