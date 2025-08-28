@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 
-const IMAGE_URL = process.env.IMAGE_URL || '';
+import { IMAGE_URL } from '@/lib/constants';
 
 interface BlogAuthor {
   name?: string;

@@ -39,3 +39,21 @@ export async function getArticle(query: string | number): ApiResponse {
     return Promise.reject(err);
   }
 }
+
+export async function getBlogPage() {
+  return await client
+    .get(`/pagecontent/blogpage?_limit=6`)
+    .then(async res => {
+      return res;
+    })
+    .catch(err => err);
+}
+
+export async function getBlogBySlug(query) {
+  return await client
+    .get(`/blogcontent/${query}`)
+    .then(async res => {
+      return res;
+    })
+    .catch(err => err);
+}

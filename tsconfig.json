@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/[slug]/page.tsx", "src/components/Pages/Category/Category.tsx", "src/components/Accordion/Accordion.tsx", "src/components/Pages/Package/Package.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/[slug]/page.tsx", "src/components/Pages/Category/Category.tsx", "src/components/Accordion/Accordion.tsx", "src/components/Pages/Package/Package.tsx", "src/app/blog/page.jsx", "src/app/blog/[slug]/page.tsx"],
   "exclude": ["node_modules"]
 }
