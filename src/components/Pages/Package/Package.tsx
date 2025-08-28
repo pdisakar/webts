@@ -133,6 +133,7 @@ export interface PackageData {
   testimonials?: Testimonial[];
   package_extra_faqs?: string;
   active_departures?: ActiveDeparture[];
+  package_abstract: string;
 }
 
 export interface PackageProps {
@@ -144,6 +145,8 @@ export interface TestimonialsCardProps {
 }
 
 const Package: React.FC<PackageProps> = ({ packageData }) => {
+  console.log(packageData);
+
   return (
     <main className="package-details">
       {packageData.banner && <PageBanner banner={packageData.banner} />}
@@ -157,9 +160,21 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
         </div>
         <div className="grid lg:grid-cols-12 gap-6">
           <div className="page-left lg:col-span-8">
+            {packageData.package_abstract && (
+              <div className="abstract">
+                <div className="common-module">
+                  <article
+                    className=" px-6 py-4 bg-primary/15 leading-[180%] font-medium text-sm rounded-md"
+                    dangerouslySetInnerHTML={{
+                      __html: packageData.package_abstract,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
             <div className="package-quick-info">
               <div className="common-module">
-                <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 [&>li>.item]:flex [&>li>.item]:gap-2 [&>li>.item>.text>.info-title]:text-sm [&>li>.item>.text>.info-title]:text-muted [&>li>.item>.text>.info]:text-headings [&>li>.item>.text>.info]:font-semibold ">
+                <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 [&>li>.item]:flex [&>li>.item]:gap-2 [&>li>.item>.text>.info-title]:text-sm [&>li>.item>.text>.info-title]:text-muted [&>li>.item>.text>.info]:text-headings [&>li>.item>.text>.info]:font-semibold ">
                   {packageData.destination?.title && (
                     <li>
                       <div className="item">
@@ -168,6 +183,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             width="36"
                             height="36"
                             viewBox="0 0 24 24"
+                            className="text-primary"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
@@ -194,6 +210,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             width="36"
                             height="36"
                             viewBox="0 0 24 24"
+                            className="text-primary"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
@@ -221,6 +238,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             width="36"
                             height="36"
                             viewBox="0 0 24 24"
+                            className="text-primary"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
                               xlinkHref="./icons.svg#grade"
@@ -246,6 +264,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             width="36"
                             height="36"
                             viewBox="0 0 24 24"
+                            className="text-primary"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
                               xlinkHref="./icons.svg#activity"
@@ -271,6 +290,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             width="36"
                             height="36"
                             viewBox="0 0 24 24"
+                            className="text-primary"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
@@ -298,6 +318,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             height="36"
                             viewBox="0 0 24 24"
                             fill="none"
+                            className="text-primary"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
                               xlinkHref="./icons.svg#altitude"
@@ -324,6 +345,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             height="36"
                             viewBox="0 0 24 24"
                             fill="none"
+                            className="text-primary"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
                               xlinkHref="./icons.svg#car"
@@ -350,6 +372,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                             height="36"
                             viewBox="0 0 24 24"
                             fill="none"
+                            className="text-primary"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
                               xlinkHref="./icons.svg#group-size"
@@ -369,7 +392,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </ul>
               </div>
             </div>
-
             {packageData.package_highlights && (
               <div className="highlight">
                 <div className="common-module">
@@ -385,7 +407,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
-
             {packageData.package_details && (
               <div
                 className="overview"
@@ -403,7 +424,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
-
             {packageData.itinerary && (
               <div
                 className="package-itinerary"
@@ -416,7 +436,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
-
             {packageData.active_departures?.length ? (
               <div
                 className="trip-testimonials"
@@ -432,7 +451,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             ) : null}
-
             {packageData.package_cost_includes && (
               <div
                 className="cost-include"
@@ -450,7 +468,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
-
             {packageData.package_cost_excludes && (
               <div
                 className="cost-exclude"
@@ -468,7 +485,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
-
             {packageData.package_trip_info && (
               <div
                 className="good-to-know"
@@ -486,7 +502,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
-
             {packageData.banners?.length ? (
               <div
                 className="trip-gallery"
@@ -499,7 +514,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             ) : null}
-
             {packageData.package_extra_faqs && (
               <div
                 className="trip-faqs"
@@ -509,7 +523,6 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
-
             {packageData.testimonials?.length ? (
               <div
                 className="trip-testimonials"
