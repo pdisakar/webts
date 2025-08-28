@@ -68,7 +68,7 @@ const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
             id="trip_search_input"
             value={query}
             onChange={handleChange}
-            className="form-control border-none bg-page-bg focus:border-primary focus:ring-0 outline-none rounded-l-md w-full px-6 py-3 placeholder:text-muted placeholder:capitalize"
+            className="form-control border-none bg-page-bg focus:border-primary focus:ring-0 outline-none rounded-md w-full px-6 py-3 placeholder:text-muted placeholder:capitalize"
             placeholder="Find your perfect quiet retreat ?"
             autoComplete="off"
           />
@@ -99,24 +99,23 @@ const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
               )}
             </div>
           )}
+          <button
+            type="submit"
+            className="bg-primary px-[18px] flex items-center gap-2 rounded-r-md text-white py-3 absolute top-0 right-0"
+            aria-label="Search">
+            <svg
+              className="icon text-white"
+              width="20"
+              height="20"
+              aria-hidden="true">
+              <use
+                xlinkHref="/icons.svg#search"
+                fill="currentColor"
+              />
+            </svg>
+            <span>Search</span>
+          </button>
         </div>
-
-        <button
-          type="submit"
-          className="bg-primary px-[18px] flex items-center gap-2 rounded-r-md text-white py-3"
-          aria-label="Search">
-          <svg
-            className="icon text-white"
-            width="20"
-            height="20"
-            aria-hidden="true">
-            <use
-              xlinkHref="/icons.svg#search"
-              fill="currentColor"
-            />
-          </svg>
-          <span>Search</span>
-        </button>
       </form>
     </div>
   );
