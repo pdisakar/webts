@@ -1,8 +1,25 @@
 import React from 'react';
 import TestimonialsCard from '../Cards/TestimonialsCard/TestimonialsCard';
-import PrimaryButton from '../Buttons/PrimaryButton';
 
-const FeaturedTestimonials = ({ limit, data }) => {
+interface Testimonial {
+  id: string | number;
+  full_name: string;
+  created_at: string | Date;
+  review: string;
+  urlinfo: {
+    url_title: string;
+  };
+}
+
+interface FeaturedTestimonialsProps {
+  limit: number;
+  data: Testimonial[];
+}
+
+const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({
+  limit,
+  data,
+}) => {
   return (
     <div className="featured-testimonials common-box pt-0">
       <div className="container">

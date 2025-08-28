@@ -1,7 +1,6 @@
 import React from 'react';
 import PrimaryButton from '../Buttons/PrimaryButton';
 import Image from 'next/image';
-
 import aboutus1 from '../../../public/AboutUs/aboutus1.webp';
 
 const features = [
@@ -11,14 +10,23 @@ const features = [
   'time and stress savings',
 ];
 
-const AboutUs = ({ data }) => {
+interface AboutUsData {
+  page_title?: string;
+  page_description?: string;
+}
+
+interface AboutUsProps {
+  data: AboutUsData;
+}
+
+const AboutUs: React.FC<AboutUsProps> = ({ data }) => {
   return (
     <div className="about-us common-box pt-0">
       <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="about-us-body">
           <div className="about-us-section">
             <div className="title">
-              <span className=" !justify-start">
+              <span className="!justify-start">
                 <svg
                   className="icon"
                   width="26"
@@ -30,12 +38,12 @@ const AboutUs = ({ data }) => {
               </span>
               <h2
                 className="company_title"
-                dangerouslySetInnerHTML={{ __html: data?.page_title }}
+                dangerouslySetInnerHTML={{ __html: data?.page_title ?? '' }}
               />
             </div>
             <article
               className="description"
-              dangerouslySetInnerHTML={{ __html: data?.page_description }}
+              dangerouslySetInnerHTML={{ __html: data?.page_description ?? '' }}
             />
           </div>
 
@@ -74,7 +82,8 @@ const AboutUs = ({ data }) => {
             />
           </div>
         </div>
-        <div className="about-us-media hidden lg:block relative ">
+
+        <div className="about-us-media hidden lg:block relative">
           <figure className="image-slot before:aspect-[628/560] w-full">
             <Image
               src={aboutus1}
@@ -86,7 +95,7 @@ const AboutUs = ({ data }) => {
               priority
             />
           </figure>
-          <figcaption className=" bg-primary w-fit text-white flex items-center justify-center gap-2 py-2 px-3 absolute bottom-6 rounded-[10px] border-4 border-page-bg right-0 z-10">
+          <figcaption className="bg-primary w-fit text-white flex items-center justify-center gap-2 py-2 px-3 absolute bottom-6 rounded-[10px] border-4 border-page-bg right-0 z-10">
             <p className="text-[35px] leading-1 font-bold">05</p>
             <p className="text-semibold leading-[19px]">
               Years of <br /> experience
