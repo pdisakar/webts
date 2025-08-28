@@ -26,37 +26,6 @@ export interface Transportation {
   title: string;
 }
 
-export interface Testimonial {
-  id: string | number;
-  [key: string]: any;
-}
-
-export interface CarouselContent {
-  [key: string]: any;
-}
-
-export interface ItineraryItem {
-  id?: string | number;
-  itinerary_title?: string | null;
-  itinerary_description?: string | null;
-  duration?: string | null;
-  meals?: string | null;
-  accommodation?: string | null;
-  origin_elevation?: string | null;
-  destination_elevation?: string | null;
-  travel_mode?: string | null;
-}
-
-export interface Itinerary {
-  details: ItineraryItem[];
-}
-
-export interface GroupFaq {
-  question?: string;
-  answer?: string;
-  [key: string]: any;
-}
-
 export interface Media {
   id: number;
   parent_id: number;
@@ -100,6 +69,45 @@ export interface ActiveDeparture {
   package_duration?: number | string;
 }
 
+export interface ItineraryItem {
+  id?: string | number;
+  itinerary_title?: string | null;
+  itinerary_description?: string | null;
+  duration?: string | null;
+  meals?: string | null;
+  accommodation?: string | null;
+  origin_elevation?: string | null;
+  destination_elevation?: string | null;
+  travel_mode?: string | null;
+}
+
+export interface Itinerary {
+  details: ItineraryItem[];
+}
+
+export interface GroupFaq {
+  question?: string;
+  answer?: string;
+  [key: string]: any;
+}
+
+export interface CarouselContent {
+  id?: string | number;
+  media?: Media;
+  [key: string]: any;
+}
+
+export interface Testimonial {
+  id?: string | number;
+  full_name: string;
+  created_at: string | Date;
+  review: string;
+  urlinfo: {
+    url_title: string;
+  };
+  [key: string]: any;
+}
+
 export interface PackageData {
   banner?: any;
   banners?: BannerItem[];
@@ -129,6 +137,10 @@ export interface PackageData {
 
 export interface PackageProps {
   packageData: PackageData;
+}
+
+export interface TestimonialsCardProps {
+  testimonial: Testimonial;
 }
 
 const Package: React.FC<PackageProps> = ({ packageData }) => {

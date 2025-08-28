@@ -24,8 +24,6 @@
   }
 }
 
-
-
 // applyed for all article tags
 article {
   h2 {
@@ -58,27 +56,6 @@ article {
   }
 
   @apply [&_ul]:mb-3 [&_ul>li]:mt-1.5 [&_ul>li]:leading-[170%] [&_ul>li]:relative [&_ul>li]:pl-5 [&_ul>li]:before:h-2 [&_ul>li]:before:w-2 [&_ul>li]:before:absolute [&_ul>li]:before:left-0 [&_ul>li]:before:top-2 [&_ul>li]:before:content-[''] [&_ul>li]:before:bg-list [&_ul>li]:before:bg-no-repeat [&_ul>li]:before:bg-cover;
-
-  .responsive-table {
-    @apply w-full overflow-x-auto mb-5;
-  }
-
-  table {
-    @apply w-full border border-primary border-collapse min-w-[600px] mb-4 mt-2;
-
-    tr:nth-child(odd) {
-      @apply bg-primary/5;
-    }
-
-    th,
-    td {
-      @apply border border-primary/50 p-[10px];
-    }
-
-    th {
-      @apply font-semibold text-left text-headings bg-primary/15;
-    }
-  }
 }
 
 /* custom scrollbar */
