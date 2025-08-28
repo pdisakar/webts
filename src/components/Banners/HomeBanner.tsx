@@ -19,9 +19,12 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ optionalData }) => {
           height={750}
           className="object-cover"
           priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 85vw, 1856px"
+          sizes="(max-width: 768px) 100vw,
+           (max-width: 1280px) 90vw,
+           1856px"
         />
       </figure>
+
       <div className="home-search bg-secondary rounded-b-[20px] hidden lg:block">
         <div className="container py-6">
           <HomeSearch optionalData={optionalData} />

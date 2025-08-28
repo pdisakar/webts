@@ -26,15 +26,17 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg }) => {
         <Link
           className="image-slot before:aspect-[640/648] rounded-t-xl"
           href={pkg.urlinfo.url_slug}
-          aria-label={`View-image for ${pkg.package_title}`}>
+          aria-label={`View image for ${pkg.package_title}`}>
           <Image
             src={IMAGE_URL + pkg.featured?.full_path}
             alt={pkg.package_title}
             width={640}
             height={648}
             className="object-cover group-hover:scale-110 transition-transform duration-400 ease-in"
-            sizes="auto, (max-width: 640px), 640px"
             priority
+            sizes="(max-width: 640px) 100vw,
+           (max-width: 1024px) 50vw,
+           640px"
           />
         </Link>
       </figure>

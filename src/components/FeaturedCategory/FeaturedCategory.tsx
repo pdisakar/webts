@@ -47,7 +47,9 @@ const FeaturedCategory: React.FC<FeaturedCategoryProps> = ({
             <li
               className="flex flex-col items-center justify-center px-6 py-3"
               key={item.id}>
-              <Link href={item?.urlinfo?.url_slug}>
+              <Link
+                aria-label={`View ${item.title} category`}
+                href={item?.urlinfo?.url_slug}>
                 <svg
                   width="70"
                   height="70">
@@ -59,7 +61,9 @@ const FeaturedCategory: React.FC<FeaturedCategoryProps> = ({
                   />
                 </svg>
               </Link>
-              <Link href={item?.urlinfo?.url_slug}>
+              <Link
+                aria-label={`View ${item.title} category`}
+                href={item?.urlinfo?.url_slug}>
                 <div className="text-center mt-6">
                   <h3 className="mb-[14px] text-[22px] leading-1 text-headings font-bold">
                     {item.title}

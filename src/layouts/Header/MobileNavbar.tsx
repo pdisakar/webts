@@ -139,6 +139,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
               href={`https://wa.me/${globalData.phone}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Chat with us on WhatsApp at ${globalData.phone}`}
               className="quick-contact flex items-center gap-2">
               <svg
                 className="icon text-primary"
@@ -154,6 +155,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
 
           <button
             onClick={toggleMobileMenu}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             className="text-primary text-2xl focus:outline-none">
             {isMobileMenuOpen ? (
               <svg
