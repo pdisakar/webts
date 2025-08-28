@@ -15,7 +15,7 @@ interface OptionalData {
 
 interface SmartSearchProps {
   optionalData: OptionalData;
-  onClose?: () => void; 
+  onClose?: () => void;
 }
 
 const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
@@ -80,7 +80,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 flex items-start justify-center pt-32"
           onClick={closeSearch}>
           <div
-            className="w-full max-w-4xl px-4"
+            className="w-full max-w-4xl px-4 relative"
             onClick={e => e.stopPropagation()}>
             <form
               className="flex items-center justify-center"
@@ -97,10 +97,32 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
                   id="smart_search_input"
                   value={query}
                   onChange={handleChange}
-                  className="form-control border border-none bg-page-bg focus:border-primary focus:ring-0 outline-none rounded-l-md w-full px-6 py-3 bg-transparent placeholder:text-muted placeholder:capitalize"
+                  className="form-control border-none bg-page-bg focus:border-primary focus:ring-0 outline-none rounded-md rounded-r-lg w-full px-6 py-3 placeholder:text-muted placeholder:capitalize"
                   placeholder="Find your perfect quiet retreat ?"
                   autoComplete="off"
                 />
+                <button
+                  type="submit"
+                  className="bg-primary px-[18px] flex items-center gap-2 rounded-r-md text-white py-3 absolute top-0 right-0 z-10"
+                  aria-label="Search">
+                  {loading ? (
+                    <div className="spinner-border h-5 w-5 border-t-2 border-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>
+                      <svg
+                        className="icon text-white"
+                        width="20"
+                        height="20"
+                        aria-hidden="true">
+                        <use
+                          xlinkHref="/icons.svg#search"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <span>Search</span>
+                    </>
+                  )}
+                </button>
 
                 {query.trim().length > 2 && (
                   <div className="absolute top-full left-0 w-full bg-white shadow-lg rounded-lg mt-2 z-[60] max-h-[300px] overflow-auto border border-border custom-scrollbar">
@@ -129,29 +151,6 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
                   </div>
                 )}
               </div>
-
-              <button
-                type="submit"
-                className="bg-primary px-[18px] flex items-center gap-2 rounded-r-md text-white py-3"
-                aria-label="Search">
-                {loading ? (
-                  <div className="spinner-border h-5 w-5 border-t-2 border-white rounded-full animate-spin"></div>
-                ) : (
-                  <>
-                    <svg
-                      className="icon text-white"
-                      width="20"
-                      height="20"
-                      aria-hidden="true">
-                      <use
-                        xlinkHref="/icons.svg#search"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span>Search</span>
-                  </>
-                )}
-              </button>
             </form>
           </div>
         </div>
