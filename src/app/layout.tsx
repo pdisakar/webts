@@ -38,7 +38,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${dmSans.variable} antialiased font-primary`}>
         <NextTopLoader
-          color="#FFFFFF"
+          color="#fcaa70"
           initialPosition={0.08}
           crawlSpeed={200}
           height={3}

@@ -1,6 +1,7 @@
 import Accordion from '@/components/Accordion/Accordion';
 import PageBanner from '@/components/Banners/PageBanner';
 import TestimonialsCard from '@/components/Cards/TestimonialsCard/TestimonialsCard';
+import FixedDeparture from '@/components/FixedDeparture/FixedDeparture';
 import TripFaqs from '@/components/TripFaqs/TripFaqs';
 import TripGallery from '@/components/TripGallery/TripGallery';
 import React from 'react';
@@ -87,6 +88,18 @@ export interface BannerItem {
   media: Media;
 }
 
+export interface ActiveDeparture {
+  id: number;
+  package_id: number;
+  departure_date: string;
+  departure_cost: number;
+  departure_note?: string | null;
+  departure_status: string;
+  created_at: string;
+  updated_at: string;
+  package_duration?: number | string;
+}
+
 export interface PackageData {
   banner?: any;
   banners?: BannerItem[];
@@ -111,6 +124,7 @@ export interface PackageData {
   groupfaqs?: GroupFaq[];
   testimonials?: Testimonial[];
   package_extra_faqs?: string;
+  active_departures?: ActiveDeparture[];
 }
 
 export interface PackageProps {
@@ -118,8 +132,6 @@ export interface PackageProps {
 }
 
 const Package: React.FC<PackageProps> = ({ packageData }) => {
-  console.log(packageData);
-
   return (
     <main className="package-details">
       {packageData.banner && <PageBanner banner={packageData.banner} />}
@@ -416,6 +428,22 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             )}
+
+            {packageData.active_departures?.length ? (
+              <div
+                className="trip-testimonials"
+                id="testimonials">
+                <div className="common-module">
+                  <div className="title">
+                    <h2>Our Fixed Departure</h2>
+                  </div>
+                  <FixedDeparture
+                    data={packageData.active_departures}
+                    duration={packageData.package_duration}
+                  />
+                </div>
+              </div>
+            ) : null}
 
             {packageData.package_cost_includes && (
               <div

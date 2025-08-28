@@ -7,15 +7,16 @@ import type { Metadata } from 'next';
 const siteUrl = `${process.env.CANONICAL_BASE}/`;
 
 interface PageParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const articleResponse = await getArticle(params.slug);
+  const { slug } = await params; 
+  const articleResponse = await getArticle(slug);
   const data = articleResponse?.data?.data;
 
   if (!data) {
@@ -23,7 +24,6 @@ export async function generateMetadata({
   }
 
   const meta = data.content?.meta;
-  const slug = data.content?.urlinfo?.url_slug;
   const banner = data.content?.banner?.full_path;
 
   return {
@@ -50,7 +50,8 @@ export async function generateMetadata({
 }
 
 export default async function Slug({ params }: PageParams) {
-  const articleResponse = await getArticle(params.slug);
+  const { slug } = await params;
+  const articleResponse = await getArticle(slug);
   const data = articleResponse?.data?.data;
 
   if (!data) {
