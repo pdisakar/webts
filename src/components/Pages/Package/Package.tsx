@@ -4,6 +4,7 @@ import TestimonialsCard from '@/components/Cards/TestimonialsCard/TestimonialsCa
 import FixedDeparture from '@/components/FixedDeparture/FixedDeparture';
 import TripFaqs from '@/components/TripFaqs/TripFaqs';
 import TripGallery from '@/components/TripGallery/TripGallery';
+import Link from 'next/link';
 import React from 'react';
 
 export interface Destination {
@@ -107,6 +108,15 @@ export interface Testimonial {
   };
   [key: string]: any;
 }
+export interface Pricegroup {
+  id: number;
+  package_id: number;
+  min_people: number;
+  max_people: number;
+  unit_price: number;
+  offer_unit_price: number;
+  offer_label?: string | null;
+}
 
 export interface PackageData {
   banner?: any;
@@ -134,6 +144,8 @@ export interface PackageData {
   package_extra_faqs?: string;
   active_departures?: ActiveDeparture[];
   package_abstract: string;
+  group_default_price: number;
+  pricegroup: Pricegroup[];
 }
 
 export interface PackageProps {
@@ -438,8 +450,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
             )}
             {packageData.active_departures?.length ? (
               <div
-                className="trip-testimonials"
-                id="testimonials">
+                className="departure-dates"
+                id="departure-dates">
                 <div className="common-module">
                   <div className="title">
                     <h2>Our Fixed Departure</h2>
@@ -542,6 +554,78 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                 </div>
               </div>
             ) : null}
+          </div>
+          <div className="package-card page-right lg:col-span-4">
+            <div className="sticky top-6 p-6 shadow-custom-shadow rounded-lg border border-primary/10">
+              <div className="default-price flex gap-3">
+                <div className="icon">
+                  <svg
+                    width="50"
+                    height="60"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <use
+                      xlinkHref="./icons.svg#stickey-price"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <div className="price-body [&_span]:text-sm [&_span]:font-semibold [&_span]:leading-[100%] [&_p]:leading-[100%] [&_p]:text-primary [&_p]:font-black [&_p]:text-2xl">
+                  <span>From</span>
+                  <p>US$ {packageData.group_default_price}</p>
+                  <span>per person</span>
+                </div>
+              </div>
+
+              {packageData?.pricegroup?.length > 0 && (
+                <div className="group-price mt-6">
+                  <p className=" text-headings font-bold text-sm mb-2">
+                    Group Discount Available{' '}
+                  </p>
+                  <ul className="space-y-2">
+                    {packageData.pricegroup.map(group => (
+                      <li
+                        key={group.id}
+                        className="flex justify-between items-center text-sm text-primary font-semibold">
+                        <span>
+                          {group.min_people === group.max_people
+                            ? `${group.min_people} Person`
+                            : `${group.min_people}-${group.max_people} People`}
+                        </span>
+                        <span className="">US$ {group.unit_price}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <div className="stickey-notification flex items-center justify-center mt-6">
+                <div className="icon">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <use
+                      xlinkHref="./icons.svg#stickey-notification"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+                <p className=" text-sm leading-[160%] ml-3 font-medium">
+                  Secure your spot now and pay later, with no upfront payment
+                  required.
+                </p>
+              </div>
+              <div className="button-group mt-6">
+                <Link
+                  href="#departure-dates"
+                  className="btn btn-primary flex justify-center px-6 py-2 text-[1.06275rem] rounded-lg w-full capitalize text-white bg-primary">
+                  Check Availability
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
