@@ -91,8 +91,8 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
               <h3 className=" text-xl font-bold text-headings/85">
                 {globalData?.company_name}
               </h3>
-              <ul className=" mt-6 [&>li+li]:mt-[18px] font-light text-text-color/85">
-                <li className="company-address flex gap-3">
+              <ul className=" mt-6 [&>li+li]:mt-[18px] [&>li]:flex [&>li]:gap-3 font-light text-text-color/85">
+                <li className="company-address">
                   <svg
                     className="icon text-primary shrink-0 mt-1"
                     width="22"
@@ -107,7 +107,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                     <p className="font-medium">{globalData?.address}</p>
                   </div>
                 </li>
-                <li className="company-phone flex gap-3">
+                <li className="company-phone">
                   <svg
                     className="icon text-primary shrink-0 mt-1"
                     width="22"
@@ -122,7 +122,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                     <p className="font-medium">{globalData?.phone}</p>
                   </div>
                 </li>
-                <li className="company-email flex gap-3">
+                <li className="company-email">
                   <svg
                     className="icon text-primary shrink-0 mt-1"
                     width="22"
@@ -132,12 +132,12 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                       fill="currentColor"
                     />
                   </svg>
-                  <div className="company-mail-details">
+                  <div className="company-mail-details flex flex-col break-words">
                     <p className="text-sm">Mail Us</p>
                     <a
-                      className="font-medium"
+                      className="font-medium break-all"
                       href={`mailto:${globalData?.email}`}>
-                      {globalData?.email}
+                      <span>{globalData?.email}</span>
                     </a>
                   </div>
                 </li>

@@ -109,13 +109,14 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
           <Link
             href="/"
             onClick={() => setIsMobileMenuOpen(false)}>
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={88}
-              height={110}
-              className="logo"
-            />
+            <div className="w-[66px] h-[82.5px] relative">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
           </Link>
         </div>
 
