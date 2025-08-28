@@ -94,7 +94,7 @@ const FixedDeparture: React.FC<FixedDepartureProps> = ({ data, duration }) => {
                 <td>
                   <Link
                     href="#"
-                    className="inline-block px-4 py-[6px] border border-primary/50 bg-primary/10 text-primary rounded hover:bg-primary hover:text-white text-center">
+                    className="inline-block px-4 py-[6px] border border-primary/50 bg-primary/10 text-primary rounded-md hover:bg-primary hover:text-white text-center">
                     Book Now
                   </Link>
                 </td>
