@@ -159,14 +159,14 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
           <div className="page-left lg:col-span-8">
             <div className="package-quick-info">
               <div className="common-module">
-                <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 [&>li>.item]:border [&>li>.item]:shadow-custom-shadow [&>li>.item]:rounded-lg [&>li>.item]:border-primary/25 [&>li>.item]:py-6 [&>li>.item]:px-1 md:[&>li>.item]:px-6 [&>li>.item]:flex [&>li>.item]:flex-col [&>li>.item]:items-center [&>li>.item>.text]:flex  [&>li>.item>.text]:mt-[10px]  [&>li>.item>.text]:capitalize  [&>li>.item>.text]:gap-[2px] [&>li>.item>.text]:flex-col [&>li>.item>.text]:text-center [&>li>.item>.text>.info-title]:text-base md:[&>li>.item>.text>.info-title]:text-lg [&>li>.item>.text>.info-title]:font-bold [&>li>.item>.text>.info]:text-muted [&>li>.item>.text>.info]:text-sm">
+                <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 [&>li>.item]:flex [&>li>.item]:gap-2 [&>li>.item>.text>.info-title]:text-sm [&>li>.item>.text>.info-title]:text-muted [&>li>.item>.text>.info]:text-headings [&>li>.item>.text>.info]:font-semibold ">
                   {packageData.destination?.title && (
                     <li>
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -177,7 +177,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Destination</span>
+                          <p className="info-title">Destination</p>
                           <span className="info">
                             {packageData.destination.title}
                           </span>
@@ -191,8 +191,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -203,7 +203,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Duration</span>
+                          <p className="info-title">Duration</p>
                           <span className="info">
                             {packageData.package_duration}{' '}
                             {packageData.package_duration_type}
@@ -218,8 +218,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
@@ -229,7 +229,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Trip Difficulty</span>
+                          <p className="info-title">Trip Difficulty</p>
                           <span className="info">
                             {packageData.grade.title}
                           </span>
@@ -243,8 +243,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <use
@@ -254,7 +254,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Activity</span>
+                          <p className="info-title">Activity</p>
                           <span className="info">
                             {packageData.style.title}
                           </span>
@@ -268,8 +268,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -280,34 +280,10 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Accommodation</span>
+                          <p className="info-title">Accommodation</p>
                           <span className="info">
                             {packageData.accommodation.title}
                           </span>
-                        </div>
-                      </div>
-                    </li>
-                  )}
-
-                  {packageData.bestseason && (
-                    <li>
-                      <div className="item">
-                        <div className="icon">
-                          <svg
-                            width="45"
-                            height="45"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use
-                              xlinkHref="./icons.svg#bestseason"
-                              fill="currentColor"
-                            />
-                          </svg>
-                        </div>
-                        <div className="text">
-                          <span className="info-title">Best Season</span>
-                          <span className="info">{packageData.bestseason}</span>
                         </div>
                       </div>
                     </li>
@@ -318,8 +294,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -330,7 +306,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Max Elevation</span>
+                          <p className="info-title">Max Elevation</p>
                           <span className="info">
                             {packageData.package_max_altitude}m
                           </span>
@@ -344,8 +320,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -356,7 +332,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Transportation</span>
+                          <p className="info-title">Transportation</p>
                           <span className="info">
                             {packageData.transportation.title}
                           </span>
@@ -370,8 +346,8 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                       <div className="item">
                         <div className="icon">
                           <svg
-                            width="45"
-                            height="45"
+                            width="36"
+                            height="36"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -382,7 +358,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
                           </svg>
                         </div>
                         <div className="text">
-                          <span className="info-title">Group Size</span>
+                          <p className="info-title">Group Size</p>
                           <span className="info">
                             Min. {packageData.package_group_size} Pax
                           </span>
