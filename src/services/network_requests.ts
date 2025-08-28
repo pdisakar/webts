@@ -1,8 +1,8 @@
-// api.ts
 import client from './network';
 import { AxiosResponse } from 'axios';
 
-type ApiResponse<T = any> = Promise<AxiosResponse<T>>;
+export type ApiResponse<T = any> = Promise<AxiosResponse<T>>;
+
 
 // Used
 export async function getGlobalData(): ApiResponse {
@@ -40,20 +40,22 @@ export async function getArticle(query: string | number): ApiResponse {
   }
 }
 
-export async function getBlogPage() {
-  return await client
-    .get(`/pagecontent/blogpage?_limit=6`)
-    .then(async res => {
-      return res;
-    })
-    .catch(err => err);
+// Blog page API
+export async function getBlogPage(): ApiResponse {
+  try {
+    const res = await client.get(`/pagecontent/blogpage?_limit=6`);
+    return res;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 }
 
-export async function getBlogBySlug(query) {
-  return await client
-    .get(`/blogcontent/${query}`)
-    .then(async res => {
-      return res;
-    })
-    .catch(err => err);
+// Blog by slug API
+export async function getBlogBySlug(query: string | number): ApiResponse {
+  try {
+    const res = await client.get(`/blogcontent/${query}`);
+    return res;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 }
