@@ -13,13 +13,13 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ optionalData }) => {
     <section className="hero-section px-0 lg:px-6">
       <figure className="image-slot before:aspect-[1856/750] w-full mx-auto">
         <Image
-          src="/banner.png"
+          src="/banner.webp"
           alt="Hero"
           width={1856}
           height={750}
-          className="object-cover bg-page-bg"
-          sizes="auto, (max-width: 1856px), 1856px"
-          fetchPriority="high"
+          className="object-cover"
+          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 85vw, 1856px"
         />
       </figure>
       <div className="home-search bg-secondary rounded-b-[20px] hidden lg:block">

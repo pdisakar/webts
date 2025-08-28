@@ -76,7 +76,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                 <Image
                   src="/logo.png"
                   alt="Logo"
-                  width={87.32}
+                  width={88}
                   height={110}
                   className="logo"
                 />

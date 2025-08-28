@@ -2,7 +2,7 @@ import React from 'react';
 import PrimaryButton from '../Buttons/PrimaryButton';
 import Image from 'next/image';
 
-import aboutus1 from '../../../public/AboutUs/aboutus1.png';
+import aboutus1 from '../../../public/AboutUs/aboutus1.webp';
 
 const features = [
   'Safety First, Always Guaranteed',
@@ -83,12 +83,14 @@ const AboutUs = ({ data }) => {
               height={560}
               className="object-cover bg-page-bg"
               sizes="(max-width: 628px) 100vw, 628px"
-              fetchPriority="high"
+              priority
             />
           </figure>
-          <figcaption className=' bg-primary w-fit text-white flex items-center justify-center gap-2 py-2 px-3 absolute bottom-6 rounded-[10px] border-4 border-page-bg right-0 z-10'>
-            <p className='text-[35px] leading-1 font-bold'>05</p>
-            <p className='text-semibold leading-[19px]'>Years of <br/> experience</p>
+          <figcaption className=" bg-primary w-fit text-white flex items-center justify-center gap-2 py-2 px-3 absolute bottom-6 rounded-[10px] border-4 border-page-bg right-0 z-10">
+            <p className="text-[35px] leading-1 font-bold">05</p>
+            <p className="text-semibold leading-[19px]">
+              Years of <br /> experience
+            </p>
           </figcaption>
         </div>
       </div>

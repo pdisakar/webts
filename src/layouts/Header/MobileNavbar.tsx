@@ -112,8 +112,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
             <Image
               src="/logo.png"
               alt="Logo"
-              width={62.87}
-              height={79.21}
+              width={88}
+              height={110}
+              className="logo"
             />
           </Link>
         </div>
