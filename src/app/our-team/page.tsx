@@ -1,14 +1,47 @@
+import React from 'react';
 import { getAllMembers } from '@/services/network_requests';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const IMAGE_URL = process.env.IMAGE_URL;
+const IMAGE_URL = process.env.IMAGE_URL || '';
 
-const page = async () => {
+// --- Interfaces --- //
+interface UrlInfo {
+  url_slug: string;
+}
+
+interface Member {
+  id: string | number;
+  full_name: string;
+  position?: string;
+  avatar: {
+    full_path: string;
+  };
+  urlinfo: UrlInfo;
+  [key: string]: any;
+}
+
+interface Section {
+  id: string | number;
+  title: string;
+  members?: Member[];
+}
+
+interface PageContent {
+  page_title: string;
+  page_description?: string;
+}
+
+interface MembersData {
+  pagecontent?: PageContent;
+  listcontent?: Section[];
+  [key: string]: any;
+}
+
+// --- Component --- //
+const Page = async () => {
   const response = await getAllMembers();
-  const data = response.data.data;
-
-  console.log(data);
+  const data: MembersData = response.data.data;
 
   return (
     <div className="pb-0 common-box">
@@ -18,23 +51,24 @@ const page = async () => {
             <div className="title text-center">
               <h2
                 dangerouslySetInnerHTML={{
-                  __html: data?.pagecontent?.page_title,
+                  __html: data.pagecontent.page_title,
                 }}
               />
             </div>
             <article
               className="text-center"
               dangerouslySetInnerHTML={{
-                __html: data?.pagecontent?.page_description,
+                __html: data.pagecontent.page_description,
               }}
             />
           </div>
         )}
+
         {data?.listcontent && (
           <div className="team-member mt-6">
             {data.listcontent.map(
-              (section: any) =>
-                section.members?.length > 0 && (
+              section =>
+                Array.isArray(section.members) && section.members.length > 0 && (
                   <div
                     className="team-category mt-6"
                     key={section.id}>
@@ -42,7 +76,7 @@ const page = async () => {
                       {section.title}
                     </h3>
                     <ul className="mt-4 flex flex-wrap items-center justify-center gap-6">
-                      {section.members.map((member: any) => (
+                      {section.members.map(member => (
                         <li
                           key={member.id}
                           className="p-2 border border-primary/10 shadow-custom-shadow rounded-md">
@@ -81,4 +115,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;
