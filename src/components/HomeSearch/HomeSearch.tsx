@@ -94,7 +94,7 @@ const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
                 </ul>
               ) : (
                 <p className="text-center text-muted p-4">
-                  No matching packages found for "{query}".
+                  No matching packages found for &quot;{query}&quot;.
                 </p>
               )}
             </div>

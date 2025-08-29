@@ -145,7 +145,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
                       </ul>
                     ) : (
                       <p className="text-center text-muted p-4">
-                        No matching packages found for "{query}".
+                        No matching packages found for &quot;{query}&quot;.
                       </p>
                     )}
                   </div>
