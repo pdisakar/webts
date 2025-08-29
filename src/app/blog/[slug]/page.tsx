@@ -22,30 +22,34 @@ interface BlogContent {
   [key: string]: any;
 }
 
-interface Params {
-  params: { slug: string };
+// Next.js 15: generateMetadata params are Promises
+interface MetadataParams {
+  params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Params) {
-  const res = await getBlogBySlug(params.slug);
+export async function generateMetadata({ params }: MetadataParams) {
+  const { slug } = await params;
+  const res = await getBlogBySlug(slug);
   if (!res) return notFound();
 
   const data: { content: BlogContent } | undefined = res.data?.data;
   if (!data) return notFound();
 
   const meta = data.content?.meta;
-  const slug = data.content?.urlinfo?.url_slug;
+  const slugFromData = data.content?.urlinfo?.url_slug;
   const banner = data.content?.banner?.full_path;
   const siteUrl = `${process.env.CANONICAL_BASE}/blog/`;
 
   return {
     title: meta?.meta_title || null,
     description: meta?.meta_description || null,
-    alternates: { canonical: `${process.env.CANONICAL_BASE}/blog/${slug}` },
+    alternates: {
+      canonical: `${process.env.CANONICAL_BASE}/blog/${slugFromData}`,
+    },
     openGraph: {
       title: meta?.meta_title,
       description: meta?.meta_description,
-      url: `${siteUrl}${slug}`,
+      url: `${siteUrl}${slugFromData}`,
       ...(banner && {
         images: [
           {
@@ -59,7 +63,7 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
-const Page = async ({ params }: Params) => {
+const Page = async ({ params }: { params: { slug: string } }) => {
   const response = await getBlogBySlug(params.slug);
   if (!response) return notFound();
 
