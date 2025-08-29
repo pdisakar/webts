@@ -22,38 +22,46 @@ interface BlogContent {
   [key: string]: any;
 }
 
-// Next.js 15: params are Promises
+// Next.js App Router: params are promises
 interface ParamsPromise {
   params: Promise<{ slug: string }>;
 }
 
+// Metadata generation
 export async function generateMetadata({ params }: ParamsPromise) {
   const { slug } = await params;
-  const res = await getBlogBySlug(slug);
-  if (!res) return notFound();
+
+  let res;
+  try {
+    res = await getBlogBySlug(slug);
+  } catch (err: any) {
+    if (err.response?.status === 404) return notFound();
+    throw err;
+  }
 
   const data: { content: BlogContent } | undefined = res.data?.data;
-  if (!data) return notFound();
+  if (!data || !data.content) return notFound();
 
-  const meta = data.content?.meta;
-  const slugFromData = data.content?.urlinfo?.url_slug;
-  const banner = data.content?.banner?.full_path;
-  const siteUrl = `${process.env.CANONICAL_BASE}/blog/`;
+  const content = data.content;
+  const meta = content.meta;
+  const slugFromData = content.urlinfo?.url_slug || slug;
+  const bannerUrl = content.banner?.full_path;
+  const siteUrl = process.env.CANONICAL_BASE || '';
 
   return {
-    title: meta?.meta_title || null,
-    description: meta?.meta_description || null,
+    title: meta?.meta_title || content.title,
+    description: meta?.meta_description || '',
     alternates: {
-      canonical: `${process.env.CANONICAL_BASE}/blog/${slugFromData}`,
+      canonical: `${siteUrl}/blog/${slugFromData}`,
     },
     openGraph: {
-      title: meta?.meta_title,
-      description: meta?.meta_description,
-      url: `${siteUrl}${slugFromData}`,
-      ...(banner && {
+      title: meta?.meta_title || content.title,
+      description: meta?.meta_description || '',
+      url: `${siteUrl}/blog/${slugFromData}`,
+      ...(bannerUrl && {
         images: [
           {
-            url: `${process.env.IMAGE_URL}${banner}`,
+            url: `${process.env.IMAGE_URL}${bannerUrl}`,
             width: 1200,
             height: 600,
           },
@@ -63,18 +71,26 @@ export async function generateMetadata({ params }: ParamsPromise) {
   };
 }
 
-// Page component also needs to await params
+// Page component
 const Page = async ({ params }: ParamsPromise) => {
   const { slug } = await params;
-  const response = await getBlogBySlug(slug);
-  if (!response) return notFound();
 
-  const data: BlogContent | undefined = response.data?.data.content;
+  let res;
+  try {
+    res = await getBlogBySlug(slug);
+  } catch (err: any) {
+    if (err.response?.status === 404) return notFound();
+    throw err;
+  }
+
+  const data: BlogContent | undefined = res.data?.data?.content;
   if (!data) return notFound();
+
+  const bannerData = data.banner;
 
   return (
     <div className="blog-page">
-      {data.banner && <PageBanner banner={data.banner} />}
+      {bannerData && <PageBanner banner={bannerData} />}
       <div className="container">
         <div className="main-container lg:w-4/5 lg:mx-auto">
           <div className="title pt-8">

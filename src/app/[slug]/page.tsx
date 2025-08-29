@@ -9,20 +9,20 @@ import type { Metadata } from 'next';
 const siteUrl = `${process.env.CANONICAL_BASE}/`;
 
 interface PageParams {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const articleResponse = await getArticle(slug);
   const data = articleResponse?.data?.data;
 
   if (!data) {
-    notFound();
+    notFound(); 
   }
 
   const meta = data.content?.meta;
@@ -52,20 +52,29 @@ export async function generateMetadata({
 }
 
 export default async function Slug({ params }: PageParams) {
-  const { slug } = await params;
-  const articleResponse = await getArticle(slug);
-  const data = articleResponse?.data?.data;
+  const { slug } = params;
 
-  if (!data) {
+  let data;
+  try {
+    const articleResponse = await getArticle(slug);
+    data = articleResponse?.data?.data;
+
+    if (!data) {
+      notFound();
+    }
+  } catch (error) {
     notFound();
   }
 
-  if (data.page_type === 'category') {
-    return <Category categoryData={data.content} />;
-  } else if (data.page_type === 'package') {
-    return <Package packageData={data.content} />;
-  } else if (data.page_type === 'article') {
-    return <Article articleData={data.content} />;
+  switch (data.page_type) {
+    case 'category':
+      return <Category categoryData={data.content} />;
+    case 'package':
+      return <Package packageData={data.content} />;
+    case 'article':
+      return <Article articleData={data.content} />;
+    default:
+      notFound();
   }
-  return <div>Page type not supported</div>;
 }
+
