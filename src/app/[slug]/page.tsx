@@ -67,6 +67,5 @@ export default async function Slug({ params }: PageParams) {
   } else if (data.page_type === 'article') {
     return <Article articleData={data.content} />;
   }
-
   return <div>Page type not supported</div>;
 }

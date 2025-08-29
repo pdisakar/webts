@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 
 export type ApiResponse<T = any> = Promise<AxiosResponse<T>>;
 
-
 // Used
 export async function getGlobalData(): ApiResponse {
   try {
@@ -58,4 +57,14 @@ export async function getBlogBySlug(query: string | number): ApiResponse {
   } catch (err) {
     return Promise.reject(err);
   }
+}
+
+// to get all members and the body of it
+export async function getAllMembers() {
+  return await client
+    .get(`/pagecontent/teampage`)
+    .then(async res => {
+      return res;
+    })
+    .catch(err => err);
 }
