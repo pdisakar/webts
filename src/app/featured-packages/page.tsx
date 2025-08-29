@@ -4,7 +4,7 @@ import PackageCard from '@/components/Cards/PackageCard/PackageCard';
 export interface FeaturedPackage {
   id: number | string;
   package_title: string;
-  package_duration: number; 
+  package_duration: number;
   package_duration_type?: string;
   total_testimonials: number;
   group_default_price: number;
@@ -16,10 +16,35 @@ export interface FeaturedPackage {
   [key: string]: any;
 }
 
-
 export interface HomeDataResponse {
   featured_packages: FeaturedPackage[];
   [key: string]: any;
+}
+
+export async function generateMetadata() {
+  return {
+    title:
+      'Featured Nepal Tours & Trekking Packages | Nepal Adventure Holidays',
+    description:
+      'Explore our handpicked featured Nepal tours and trekking packages. Adventure, culture, and Himalayas await! Book your unforgettable journey today.',
+    alternates: { canonical: `${process.env.CANONICAL_BASE || ''}/` },
+    openGraph: {
+      title:
+        'Featured Nepal Tours & Trekking Packages | Nepal Adventure Holidays',
+      description:
+        'Explore our handpicked featured Nepal tours and trekking packages. Adventure, culture, and Himalayas await! Book your unforgettable journey today.',
+      url: `${process.env.CANONICAL_BASE || ''}/`,
+      images: [
+        {
+          url: `${process.env.IMAGE_URL || ''}/default-home-banner.jpg`,
+          width: 1200,
+          height: 600,
+        },
+      ],
+    },
+    keywords:
+      'Nepal tours, trekking in Nepal, Everest Base Camp, Annapurna Circuit, Nepal adventure packages, featured Nepal tours, Himalaya trekking, Nepal travel',
+  };
 }
 
 const Page = async () => {

@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const IMAGE_URL = process.env.IMAGE_URL || '';
+const CANONICAL_BASE = process.env.CANONICAL_BASE || '';
 
-// --- Interfaces --- //
 interface UrlInfo {
   url_slug: string;
 }
@@ -14,11 +14,8 @@ interface Member {
   id: string | number;
   full_name: string;
   position?: string;
-  avatar: {
-    full_path: string;
-  };
+  avatar: { full_path: string };
   urlinfo: UrlInfo;
-  [key: string]: any;
 }
 
 interface Section {
@@ -30,15 +27,50 @@ interface Section {
 interface PageContent {
   page_title: string;
   page_description?: string;
+  meta?: {
+    meta_title?: string;
+    meta_description?: string;
+    banner?: string;
+  };
 }
 
 interface MembersData {
   pagecontent?: PageContent;
   listcontent?: Section[];
-  [key: string]: any;
 }
 
-// --- Component --- //
+export async function generateMetadata(): Promise<any> {
+  const response = await getAllMembers();
+  const data: MembersData = response.data.data;
+
+  const metaTitle =
+    data.pagecontent?.meta?.meta_title || data.pagecontent?.page_title || '';
+  const metaDescription =
+    data.pagecontent?.meta?.meta_description ||
+    data.pagecontent?.page_description ||
+    '';
+
+  return {
+    title: metaTitle,
+    description: metaDescription,
+    alternates: { canonical: `${CANONICAL_BASE}/our-team` },
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription,
+      url: `${CANONICAL_BASE}/our-team`,
+      ...(data.pagecontent?.meta?.banner && {
+        images: [
+          {
+            url: IMAGE_URL + data.pagecontent.meta.banner,
+            width: 1200,
+            height: 600,
+          },
+        ],
+      }),
+    },
+  };
+}
+
 const Page = async () => {
   const response = await getAllMembers();
   const data: MembersData = response.data.data;
@@ -68,7 +100,8 @@ const Page = async () => {
           <div className="team-member mt-6">
             {data.listcontent.map(
               section =>
-                Array.isArray(section.members) && section.members.length > 0 && (
+                Array.isArray(section.members) &&
+                section.members.length > 0 && (
                   <div
                     className="team-category mt-6"
                     key={section.id}>
