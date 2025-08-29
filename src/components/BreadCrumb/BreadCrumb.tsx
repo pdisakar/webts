@@ -7,18 +7,14 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbProps {
-  breadcrumb: any; 
+  breadcrumb: BreadcrumbItem[][];
 }
 
 const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
+  if (!breadcrumb || !breadcrumb[0] || breadcrumb[0].length === 0) return null;
 
-  let breadcrumbItems: BreadcrumbItem[] = [];
-
-  if (Array.isArray(breadcrumb)) {
-    breadcrumbItems = breadcrumb[0] || [];
-  } else if (typeof breadcrumb === 'object' && breadcrumb !== null) {
-    breadcrumbItems = Object.values(breadcrumb)[0] as BreadcrumbItem[];
-  }
+  const breadcrumbItems = breadcrumb[0];
+  const lastItem = breadcrumbItems[breadcrumbItems.length - 1];
 
   return (
     <div className="breadcrumb-container">
@@ -26,50 +22,20 @@ const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
         <ul className="flex items-center text-[13px] font-semibold text-muted [&>li:last-child]:text-primary">
           <li className="flex items-center">
             <Link href="/">Home</Link>
-            {breadcrumbItems.length > 0 && (
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                className="text-muted mx-1"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <use
-                  xlinkHref="./icons.svg#breadcrumb"
-                  fill="currentColor"
-                />
-              </svg>
-            )}
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              className="text-muted mx-1"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <use xlinkHref="./icons.svg#breadcrumb" fill="currentColor" />
+            </svg>
           </li>
 
-          {breadcrumbItems.map((item, index) => {
-            const isLast = index === breadcrumbItems.length - 1;
-            return (
-              <li
-                key={index}
-                className="flex items-center">
-                {isLast ? (
-                  <span aria-current="page">{item.title}</span>
-                ) : (
-                  <Link href={`/${item.slug}`}>{item.title}</Link>
-                )}
-                {!isLast && (
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    className="text-muted mx-1"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <use
-                      xlinkHref="./icons.svg#breadcrumb"
-                      fill="currentColor"
-                    />
-                  </svg>
-                )}
-              </li>
-            );
-          })}
+          <li className="flex items-center">
+            <span aria-current="page">{lastItem.title}</span>
+          </li>
         </ul>
       </nav>
     </div>

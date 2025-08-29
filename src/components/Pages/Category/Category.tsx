@@ -25,7 +25,6 @@ interface CategoryProps {
 }
 
 export default function Category({ categoryData, breadcrumb }: CategoryProps) {
-  console.log(breadcrumb);
   return (
     <div className="category-details">
       {categoryData.banner && <PageBanner banner={categoryData.banner} />}

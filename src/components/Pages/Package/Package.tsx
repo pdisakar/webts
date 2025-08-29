@@ -1,8 +1,8 @@
 import Accordion from '@/components/Accordion/Accordion';
 import PageBanner from '@/components/Banners/PageBanner';
+import BreadCrumbPackage from '@/components/BreadCrumb/BreadCrumbPackage';
 import TestimonialsCard from '@/components/Cards/TestimonialsCard/TestimonialsCard';
 import FixedDeparture from '@/components/FixedDeparture/FixedDeparture';
-import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 
 import TripFaqs from '@/components/TripFaqs/TripFaqs';
 import TripGallery from '@/components/TripGallery/TripGallery';
@@ -160,14 +160,15 @@ export interface TestimonialsCardProps {
 }
 
 const Package: React.FC<PackageProps> = ({ packageData, breadcrumb }) => {
-  console.log(breadcrumb);
-
   return (
     <main className="package-details">
       {packageData.banner && <PageBanner banner={packageData.banner} />}
       <div className="container">
         <div className="common-module mb-0 mt-4">
-          <BreadCrumb breadcrumb={breadcrumb} />
+          <BreadCrumbPackage
+            breadcrumb={breadcrumb}
+            currentpage={packageData.package_title}
+          />
           <div className="title">
             <h1
               dangerouslySetInnerHTML={{
