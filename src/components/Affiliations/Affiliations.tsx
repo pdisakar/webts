@@ -18,6 +18,7 @@ const Affiliations = () => {
             <Image
               src={affiliations1}
               alt="Affiliation 1"
+              title="Affiliation 1"
               width={66}
               height={60}
               className="object-contain"
@@ -28,6 +29,7 @@ const Affiliations = () => {
             <Image
               src={affiliations2}
               alt="Affiliation 2"
+              title="Affiliation 2"
               width={71}
               height={60}
               className="object-contain"
@@ -38,6 +40,7 @@ const Affiliations = () => {
             <Image
               src={affiliations3}
               alt="Affiliation 3"
+              title="Affiliation 3"
               width={70}
               height={60}
               className="object-contain"
@@ -48,6 +51,7 @@ const Affiliations = () => {
             <Image
               src={affiliations4}
               alt="Affiliation 4"
+              title="Affiliation 4"
               width={44}
               height={60}
               className="object-contain"
@@ -58,6 +62,7 @@ const Affiliations = () => {
             <Image
               src={affiliations5}
               alt="Affiliation 5"
+              title="Affiliation 5"
               width={188}
               height={40}
               className="object-contain"
@@ -68,6 +73,7 @@ const Affiliations = () => {
             <Image
               src={affiliations6}
               alt="Affiliation 6"
+              title="Affiliation 6"
               width={199}
               height={40}
               className="object-contain"
@@ -78,6 +84,7 @@ const Affiliations = () => {
             <Image
               src={affiliations7}
               alt="Affiliation 7"
+              title="Affiliation 7"
               width={185}
               height={33}
               className="object-contain"

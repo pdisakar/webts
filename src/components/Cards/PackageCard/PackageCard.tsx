@@ -26,9 +26,11 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg }) => {
         <Link
           className="image-slot before:aspect-[640/648] rounded-t-xl"
           href={pkg.urlinfo.url_slug}
-          aria-label={`View image for ${pkg.package_title}`}>
+          aria-label={`View image for ${pkg.package_title}`}
+          title={pkg.package_title}>
           <Image
             src={IMAGE_URL + pkg.featured?.full_path}
+            title={pkg.package_title}
             alt={pkg.package_title}
             width={640}
             height={648}

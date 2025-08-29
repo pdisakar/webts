@@ -29,10 +29,12 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
         <Link
           className="image-slot rounded-t-lg before:aspect-[384/285.16]"
           href={`/${category.urlinfo.url_slug}`}
+          title={category.title}
           aria-label={`View image for ${category.title}`}>
           <Image
             src={IMAGE_URL + (category.featured?.full_path || '')}
             alt={category.title}
+            title={category.title}
             width={384}
             height={285}
             className="object-cover rounded-t-lg group-hover:scale-110 transition-transform duration-400 ease-in"

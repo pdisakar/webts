@@ -20,6 +20,7 @@ const PageBanner: React.FC<PageBannerProps> = ({ banner }) => {
         alt={banner.full_name || 'Page Banner'}
         width={1920}
         height={750}
+        title={banner.full_name || 'Page Banner'}
         className="object-cover"
         sizes="(max-width: 1920px) 100vw, 1920px"
         priority

@@ -122,6 +122,7 @@ const Page = async () => {
                               alt={member.full_name}
                               width={640}
                               height={648}
+                              title={member.full_name}
                               className="object-cover rounded-[4px]"
                               priority
                               sizes="(max-width: 469px) 100vw, (max-width: 469px) 50vw, 469px"

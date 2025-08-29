@@ -66,6 +66,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
           <Image
             src="/logo.png"
             alt="Logo"
+            title='logo'
             width={88}
             height={110}
             className="logo"

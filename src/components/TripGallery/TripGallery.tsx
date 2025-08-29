@@ -52,6 +52,7 @@ const TripGallery: React.FC<TripGalleryProps> = ({ data = [] }) => {
               alt={item.alt_text ?? `Trip gallery image ${index + 1}`}
               width={400}
               height={150}
+              title={item.alt_text ?? `Trip gallery image ${index + 1}`}
               className="object-cover rounded-md md:rounded-lg"
               sizes="(max-width: 400px) 100vw, 400px"
               priority

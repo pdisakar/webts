@@ -36,7 +36,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ data }) => {
                 </svg>
                 Made Just For You
               </span>
-              <h2
+              <h1
                 className="company_title"
                 dangerouslySetInnerHTML={{ __html: data?.page_title ?? '' }}
               />
@@ -90,6 +90,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ data }) => {
               alt="Hero"
               width={628}
               height={560}
+              title="Home Banner"
               className="object-cover bg-page-bg"
               sizes="(max-width: 628px) 100vw, 628px"
               priority

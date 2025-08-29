@@ -18,6 +18,7 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ optionalData }) => {
           width={1856}
           height={750}
           className="object-cover"
+          title="Home Banner"
           priority
           sizes="(max-width: 768px) 100vw,
            (max-width: 1280px) 90vw,

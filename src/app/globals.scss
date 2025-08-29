@@ -164,15 +164,13 @@ article.custom-scrollbar {
   }
 }
 
-//hero section h1 style
-h1 {
-  @apply font-black text-headings text-center max-w-[1000px] mx-auto capitalize leading-[1.2];
-  font-size: clamp(1.75rem, 4vw + 0.5rem, 5rem);
-}
-
 //title h2 and span style
 .title {
   @apply mb-4;
+  h1 {
+    @apply text-headings font-black;
+    font-size: clamp(1.75rem, 5vw, 2.125rem);
+  }
   h2 {
     @apply text-headings font-black;
     font-size: clamp(1.75rem, 5vw, 2.125rem);

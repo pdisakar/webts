@@ -36,6 +36,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
                 src={IMAGE_URL + blog.featured.full_path}
                 alt={blog.title}
                 fill
+                title={blog.title}
                 className="object-cover w-full h-full rounded-[4px] transition-transform duration-400 ease-in group-hover:scale-110"
                 sizes="(max-width: 235px) 100vw, 235px"
                 priority

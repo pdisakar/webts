@@ -74,6 +74,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
               <Image
                 src="/logo.png"
                 alt="Logo"
+                title="logo"
                 fill
                 className="object-contain"
               />

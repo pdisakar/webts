@@ -58,6 +58,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ limit, data }) => {
                   <Image
                     src={IMAGE_URL + firstBlog?.featured?.full_path}
                     alt={firstBlog.title}
+                    title={firstBlog.title}
                     width={628}
                     height={417}
                     className="object-cover bg-page-bg rounded-lg w-full h-full group-hover:scale-110 transition-transform duration-400 ease-in"
@@ -92,7 +93,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ limit, data }) => {
             />
           ))}
           <li className="">
-            <p className=' text-sm leading-[160%] text-center'>
+            <p className=" text-sm leading-[160%] text-center">
               Set out on remarkable adventures with our Featured Holidays. From
               serene beach retreats to enriching cultural explorations, every
               destination is handpicked to create your ideal escape.

@@ -77,6 +77,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                   src="/logo.png"
                   alt="Logo"
                   width={88}
+                  title="logo"
                   height={110}
                   className="logo"
                 />
@@ -187,6 +188,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
             <Image
               src={cards}
               alt="Cards We Accept"
+              title="Cards We Accept"
               width={292}
               height={32.67}
               className="w-full h-auto"
@@ -203,6 +205,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
       <Image
         src="/footer.svg"
         alt="Footer illustration"
+        title="footer svg"
         width={1920}
         height={400}
         priority
