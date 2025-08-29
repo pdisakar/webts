@@ -26,7 +26,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
   return (
     <li>
       <div className="item grid grid-cols-1 lg:grid-cols-5 gap-5 items-center overflow-hidden group">
-        <figure className="col-span-1 lg:col-span-2 relative w-full aspect-[235/156] rounded-[4px] overflow-hidden">
+        <figure className="col-span-1 lg:col-span-2 relative image-slot w-full aspect-[235/156] rounded-[4px] overflow-hidden">
           <Link
             href={`blog/${blog.urlinfo.url_slug}`}
             aria-label={`View image for ${blog.title}`}
