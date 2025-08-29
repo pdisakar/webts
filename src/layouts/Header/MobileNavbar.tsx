@@ -233,7 +233,6 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
         )}
       </div>
 
-      {/* Backdrop Element */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-20 lg:hidden"></div>
       )}

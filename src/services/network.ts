@@ -1,4 +1,3 @@
-// network.ts
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 const PRODUCTION_SERVER: string | undefined = process.env.PRODUCTION_SERVER;

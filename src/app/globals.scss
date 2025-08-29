@@ -156,10 +156,10 @@ article.custom-scrollbar {
 
   @keyframes shimmer {
     0% {
-      background-position: 200% 0; // start from right
+      background-position: 200% 0; 
     }
     100% {
-      background-position: -200% 0; // move to left
+      background-position: -200% 0; 
     }
   }
 }
