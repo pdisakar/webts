@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
-const Page: React.FC<Params> = async ({ params }) => {
+const Page = async ({ params }: Params) => {
   const response = await getBlogBySlug(params.slug);
   if (!response) return notFound();
 
