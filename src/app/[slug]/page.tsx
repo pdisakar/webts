@@ -75,7 +75,12 @@ export default async function Slug({ params }: PageParams) {
         />
       );
     case 'package':
-      return <Package packageData={data.content} />;
+      return (
+        <Package
+          packageData={data.content}
+          breadcrumb={data.breadcrumbs}
+        />
+      );
     case 'article':
       return <Article articleData={data.content} />;
     default:

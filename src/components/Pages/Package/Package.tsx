@@ -2,6 +2,8 @@ import Accordion from '@/components/Accordion/Accordion';
 import PageBanner from '@/components/Banners/PageBanner';
 import TestimonialsCard from '@/components/Cards/TestimonialsCard/TestimonialsCard';
 import FixedDeparture from '@/components/FixedDeparture/FixedDeparture';
+import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
+
 import TripFaqs from '@/components/TripFaqs/TripFaqs';
 import TripGallery from '@/components/TripGallery/TripGallery';
 import Link from 'next/link';
@@ -150,23 +152,28 @@ export interface PackageData {
 
 export interface PackageProps {
   packageData: PackageData;
+  breadcrumb?: any;
 }
 
 export interface TestimonialsCardProps {
   testimonial: Testimonial;
 }
 
-const Package: React.FC<PackageProps> = ({ packageData }) => {
+const Package: React.FC<PackageProps> = ({ packageData, breadcrumb }) => {
+  console.log(breadcrumb);
+
   return (
     <main className="package-details">
       {packageData.banner && <PageBanner banner={packageData.banner} />}
       <div className="container">
-        <div className="title mt-3">
-          <h2
-            className="common-module mb-0"
-            dangerouslySetInnerHTML={{
-              __html: packageData.package_title,
-            }}></h2>
+        <div className="common-module mb-0 mt-4">
+          <BreadCrumb breadcrumb={breadcrumb} />
+          <div className="title">
+            <h2
+              dangerouslySetInnerHTML={{
+                __html: packageData.package_title,
+              }}></h2>
+          </div>
         </div>
         <div className="grid lg:grid-cols-12 gap-6">
           <div className="page-left lg:col-span-8">

@@ -7,17 +7,23 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbProps {
-  breadcrumb: Array<Array<BreadcrumbItem>>;
+  breadcrumb: any; 
 }
 
 const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
-  const breadcrumbItems = breadcrumb[0] || [];
+
+  let breadcrumbItems: BreadcrumbItem[] = [];
+
+  if (Array.isArray(breadcrumb)) {
+    breadcrumbItems = breadcrumb[0] || [];
+  } else if (typeof breadcrumb === 'object' && breadcrumb !== null) {
+    breadcrumbItems = Object.values(breadcrumb)[0] as BreadcrumbItem[];
+  }
 
   return (
-    <div className="breadcrumb-container flex justify-center">
+    <div className="breadcrumb-container">
       <nav aria-label="breadcrumb">
         <ul className="flex items-center text-[13px] font-semibold text-muted [&>li:last-child]:text-primary">
-          {/* ✅ Home link always first */}
           <li className="flex items-center">
             <Link href="/">Home</Link>
             {breadcrumbItems.length > 0 && (

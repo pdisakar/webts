@@ -25,6 +25,7 @@ interface CategoryProps {
 }
 
 export default function Category({ categoryData, breadcrumb }: CategoryProps) {
+  console.log(breadcrumb);
   return (
     <div className="category-details">
       {categoryData.banner && <PageBanner banner={categoryData.banner} />}
@@ -33,9 +34,9 @@ export default function Category({ categoryData, breadcrumb }: CategoryProps) {
         <div className="common-box">
           <div className="container">
             <div className="common-module mb-0">
-              {breadcrumb && breadcrumb.length > 0 && (
+              <div className=" flex justify-center">
                 <BreadCrumb breadcrumb={breadcrumb} />
-              )}
+              </div>
               <div className="title text-center">
                 <h2
                   dangerouslySetInnerHTML={{ __html: categoryData.title }}></h2>
