@@ -77,7 +77,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ data }) => {
 
           <div className="mt-8">
             <PrimaryButton
-              href="/our-story"
+              href="/about-us"
               label="Read More About Us"
             />
           </div>
