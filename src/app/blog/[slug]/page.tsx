@@ -22,12 +22,12 @@ interface BlogContent {
   [key: string]: any;
 }
 
-// Next.js 15: generateMetadata params are Promises
-interface MetadataParams {
+// Next.js 15: params are Promises
+interface ParamsPromise {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: MetadataParams) {
+export async function generateMetadata({ params }: ParamsPromise) {
   const { slug } = await params;
   const res = await getBlogBySlug(slug);
   if (!res) return notFound();
@@ -63,8 +63,10 @@ export async function generateMetadata({ params }: MetadataParams) {
   };
 }
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const response = await getBlogBySlug(params.slug);
+// Page component also needs to await params
+const Page = async ({ params }: ParamsPromise) => {
+  const { slug } = await params;
+  const response = await getBlogBySlug(slug);
   if (!response) return notFound();
 
   const data: BlogContent | undefined = response.data?.data.content;
