@@ -157,8 +157,6 @@ export interface TestimonialsCardProps {
 }
 
 const Package: React.FC<PackageProps> = ({ packageData }) => {
-  console.log(packageData);
-
   return (
     <main className="package-details">
       {packageData.banner && <PageBanner banner={packageData.banner} />}

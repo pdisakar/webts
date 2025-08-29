@@ -2,7 +2,12 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['fis-api.nepaladventureholiday.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fis-api.nepaladventureholiday.com',
+      },
+    ],
   },
 };
 

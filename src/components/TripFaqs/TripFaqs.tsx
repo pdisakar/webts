@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface GroupFaq {
   id?: string | number;
@@ -20,10 +20,15 @@ const TripFaqs: React.FC<FaqAccordionProps> = ({ data }) => {
   const [activeIndexes, setActiveIndexes] = useState<
     Record<string, number | null>
   >({});
+
+  const [sections, setSections] = useState<FaqSection[]>([]);
   const contentRefs = useRef<Record<string, Array<HTMLDivElement | null>>>({});
 
-  const sections: FaqSection[] = useMemo(() => {
-    if (!data) return [];
+  useEffect(() => {
+    if (!data) {
+      setSections([]);
+      return;
+    }
 
     if (typeof data === 'string') {
       const parser = new DOMParser();
@@ -42,19 +47,19 @@ const TripFaqs: React.FC<FaqAccordionProps> = ({ data }) => {
           });
         } else if (el.tagName === 'P' && currentSection) {
           const lastFaq = currentSection.faqs[currentSection.faqs.length - 1];
-          if (lastFaq) lastFaq.answer = el.outerHTML;
+          if (lastFaq) {
+            lastFaq.answer = el.outerHTML;
+          }
         }
       });
 
-      return sectionsArr;
+      setSections(sectionsArr);
+    } else if (Array.isArray(data)) {
+      setSections([{ faqs: data }]);
+    } else {
+      setSections([]);
     }
-
-    if (Array.isArray(data)) {
-      return [{ faqs: data }];
-    }
-
-    return [];
-  }, [data]);
+  }, [data]); 
 
   const toggle = (sectionKey: string, index: number) => {
     setActiveIndexes(prev => ({

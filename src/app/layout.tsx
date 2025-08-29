@@ -16,16 +16,20 @@ const dmSans = DM_Sans({
 export const metadata = {
   generator: process.env.COMPANY_NAME || 'Default Generator',
   applicationName: process.env.COMPANY_NAME || 'Default Application',
-  colorScheme: 'light',
   creator: process.env.COMPANY_NAME || 'Default Creator',
   publisher: process.env.COMPANY_NAME || 'Default Publisher',
+  // Remove themeColor from here
 };
+
+// Export themeColor separately
+export const themeColor = [
+  { media: '(prefers-color-scheme: light)', color: 'white' },
+  { media: '(prefers-color-scheme: dark)', color: 'black' },
+];
 
 export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   const [globalDataResponse, optionsDataResponse] = await Promise.all([
     getGlobalData(),
     getOptionsData(),
@@ -47,7 +51,6 @@ export default async function RootLayout({
           easing="ease"
           speed={200}
         />
-
         <Header
           optionalData={optionsData}
           globalData={data}
