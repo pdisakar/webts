@@ -38,8 +38,8 @@ export default function Category({ categoryData, breadcrumb }: CategoryProps) {
                 <BreadCrumb breadcrumb={breadcrumb} />
               </div>
               <div className="title text-center">
-                <h2
-                  dangerouslySetInnerHTML={{ __html: categoryData.title }}></h2>
+                <h1
+                  dangerouslySetInnerHTML={{ __html: categoryData.title }}></h1>
               </div>
             </div>
 

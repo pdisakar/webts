@@ -94,7 +94,7 @@ const Page = async ({ params }: ParamsPromise) => {
       <div className="container">
         <div className="main-container lg:w-4/5 lg:mx-auto">
           <div className="title pt-8">
-            <h2>{data.title}</h2>
+            <h1>{data.title}</h1>
             <div className="blog-author-details text-sm text-muted flex items-center justify-between py-3 border-y border-border border-dashed mt-2">
               <div className="author flex items-center">
                 <div className="w-[32px] h-[32px] border border-primary rounded-full p-[2px] shrink-0 mr-2">

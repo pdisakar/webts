@@ -56,7 +56,7 @@ const Page = async () => {
       <div className="common-box">
         <div className="container">
           <div className="title text-center">
-            <h2>Our Featured Packages</h2>
+            <h1>Our Featured Packages</h1>
             <div className="flex items-center gap-2 mx-auto justify-center text-[15px] text-primary">
               <p>{data.featured_packages.length} Packages</p>
             </div>

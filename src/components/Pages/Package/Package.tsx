@@ -169,10 +169,10 @@ const Package: React.FC<PackageProps> = ({ packageData, breadcrumb }) => {
         <div className="common-module mb-0 mt-4">
           <BreadCrumb breadcrumb={breadcrumb} />
           <div className="title">
-            <h2
+            <h1
               dangerouslySetInnerHTML={{
                 __html: packageData.package_title,
-              }}></h2>
+              }}></h1>
           </div>
         </div>
         <div className="grid lg:grid-cols-12 gap-6">

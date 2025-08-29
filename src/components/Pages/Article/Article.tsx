@@ -1,4 +1,5 @@
 import React from 'react';
+import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 
 interface ArticleData {
   page_title: string;
@@ -6,21 +7,34 @@ interface ArticleData {
   [key: string]: any;
 }
 
-interface ArticleProps {
-  articleData: ArticleData;
+interface BreadcrumbItem {
+  title: string;
+  slug: string;
 }
 
-export default function Article({ articleData }: ArticleProps) {
+interface breadcrumbData extends Array<Array<BreadcrumbItem>> {}
+
+interface ArticleProps {
+  articleData: ArticleData;
+  breadcrumb: breadcrumbData;
+}
+
+export default function Article({ articleData, breadcrumb }: ArticleProps) {
   return (
     <div className="article-body">
       <div className="pb-0 common-box">
         <div className="container">
-          <div className="title text-center">
-            <h2
-              dangerouslySetInnerHTML={{
-                __html: articleData.page_title,
-              }}
-            />
+          <div className="common-module mb-0">
+            <div className=" flex justify-center">
+              <BreadCrumb breadcrumb={breadcrumb} />
+            </div>
+            <div className="title text-center">
+              <h1
+                dangerouslySetInnerHTML={{
+                  __html: articleData.page_title,
+                }}
+              />
+            </div>
           </div>
           <article
             className="text-center"

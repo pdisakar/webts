@@ -82,7 +82,12 @@ export default async function Slug({ params }: PageParams) {
         />
       );
     case 'article':
-      return <Article articleData={data.content} />;
+      return (
+        <Article
+          articleData={data.content}
+          breadcrumb={data.breadcrumbs}
+        />
+      );
     default:
       notFound();
   }

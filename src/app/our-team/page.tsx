@@ -81,7 +81,7 @@ const Page = async () => {
         {data?.pagecontent?.page_description && (
           <div className="about-section">
             <div className="title text-center">
-              <h2
+              <h1
                 dangerouslySetInnerHTML={{
                   __html: data.pagecontent.page_title,
                 }}

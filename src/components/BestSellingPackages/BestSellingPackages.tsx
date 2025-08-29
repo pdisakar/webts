@@ -40,7 +40,7 @@ const BestSellingPackages: React.FC<BestSellingPackagesProps> = ({
             </svg>
             Tour Package
           </span>
-          <h2 className="text-center mx-auto">Best Selling Packages</h2>
+          <h1 className="text-center mx-auto">Best Selling Packages</h1>
           <p className="text-center mx-auto">
             Explore our best-selling packages, crafted for excellence and
             offering unmatched value and satisfaction.

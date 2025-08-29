@@ -82,7 +82,7 @@ const Page: React.FC = async () => {
     <div className="blog-body">
       <div className="container">
         <div className="title pt-8 text-center">
-          <h2>Our Blogs</h2>
+          <h1>Our Blogs</h1>
         </div>
         <BlogList initialPosts={initialData} />
       </div>
