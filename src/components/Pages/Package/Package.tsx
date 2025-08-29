@@ -499,7 +499,7 @@ const Package: React.FC<PackageProps> = ({ packageData }) => {
               <div
                 className="good-to-know"
                 id="good-to-know">
-                <div className="common-module p-6 bg-primary/[0.05] relative z-10 after:-z-10 after:absolute after:bg-[length:32px_auto] after:bg-pattern after:opacity-100 after:inset-0 after:bottom-[100px]">
+                <div className="common-module p-6 bg-primary/[0.05] relative z-10 after:-z-10 after:absolute after:bg-[length:32px_auto] after:opacity-100 after:inset-0 after:bottom-[100px]">
                   <div className="title">
                     <h2>Good to Know Before</h2>
                   </div>

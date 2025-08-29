@@ -24,7 +24,6 @@ export default {
         list: "url('/icons/list.svg')",
         correct: "url('/icons/correct.svg')",
         incorrect: "url('/icons/incorrect.svg')",
-        pattern: "url('/icons/pattern.svg')",
         worldmap: "url('/icons/worldmap.svg')",
         dottedline: "url('/icons/dottedline.svg')",
       },
