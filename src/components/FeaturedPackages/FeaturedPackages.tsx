@@ -52,13 +52,6 @@ const FeaturedPackages: React.FC<FeaturedPackagesProps> = ({ limit, data }) => {
             />
           ))}
         </div>
-
-        <div className="action-btn relative flex justify-center mt-12 after:absolute after:top-1/2 after:left-1/2 after:-translate-y-1/2 after:-translate-x-1/2 after:content-[''] after:w-full after:h-[1px] after:bg-dottedline after:-z-10">
-          <PrimaryButton
-            href="/featured-packages"
-            label="View All Packages"
-          />
-        </div>
       </div>
     </section>
   );

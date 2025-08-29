@@ -10,8 +10,6 @@ import FeaturedBlog from '@/components/FeaturedBlog/FeaturedBlog';
 const BASE_URL = process.env.BASE_URL || '';
 const IMAGE_URL = process.env.IMAGE_URL || '';
 
-
-
 export async function generateMetadata() {
   const response = await getHomeData();
   const data = response?.data?.data;
@@ -51,13 +49,14 @@ export default async function Home() {
         data={data?.featured_categories}
         limit={4}
       />
-      <FeaturedPackages
-        data={data?.featured_packages}
+
+      <BestSellingPackages
+        data={data?.category_section_a}
         limit={3}
       />
       <AboutUs data={data?.pagecontent} />
-      <BestSellingPackages
-        data={data?.category_section_a}
+      <FeaturedPackages
+        data={data?.featured_packages}
         limit={3}
       />
       <FeaturedTestimonials
