@@ -9,21 +9,24 @@ import type { Metadata } from 'next';
 const siteUrl = `${process.env.CANONICAL_BASE}/`;
 
 interface PageParams {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const { slug } = params;
-  const articleResponse = await getArticle(slug);
-  const data = articleResponse?.data?.data;
+  const { slug } = await params;
 
-  if (!data) {
-    notFound(); 
+  let articleResponse;
+  try {
+    articleResponse = await getArticle(slug);
+  } catch (err: any) {
+    if (err.response?.status === 404) return notFound();
+    throw err;
   }
+
+  const data = articleResponse?.data?.data;
+  if (!data) return notFound();
 
   const meta = data.content?.meta;
   const banner = data.content?.banner?.full_path;
@@ -32,7 +35,7 @@ export async function generateMetadata({
     title: meta?.meta_title || 'Untitled',
     description: meta?.meta_description || '',
     alternates: {
-      canonical: `${process.env.CANONICAL_BASE}/${slug}`,
+      canonical: `${siteUrl}${slug}`,
     },
     openGraph: {
       title: meta?.meta_title || 'Untitled',
@@ -52,17 +55,14 @@ export async function generateMetadata({
 }
 
 export default async function Slug({ params }: PageParams) {
-  const { slug } = params;
+  const { slug } = await params;
 
   let data;
   try {
     const articleResponse = await getArticle(slug);
     data = articleResponse?.data?.data;
-
-    if (!data) {
-      notFound();
-    }
-  } catch (error) {
+    if (!data) notFound();
+  } catch (err) {
     notFound();
   }
 
@@ -77,4 +77,3 @@ export default async function Slug({ params }: PageParams) {
       notFound();
   }
 }
-
