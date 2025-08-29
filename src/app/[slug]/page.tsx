@@ -68,7 +68,12 @@ export default async function Slug({ params }: PageParams) {
 
   switch (data.page_type) {
     case 'category':
-      return <Category categoryData={data.content} />;
+      return (
+        <Category
+          categoryData={data.content}
+          breadcrumb={data.breadcrumbs}
+        />
+      );
     case 'package':
       return <Package packageData={data.content} />;
     case 'article':

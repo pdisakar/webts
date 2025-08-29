@@ -1,4 +1,5 @@
 import PageBanner, { BannerData } from '@/components/Banners/PageBanner';
+import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 import CategoryCard from '@/components/Cards/CategoryCard/CategoryCard';
 import PackageCard from '@/components/Cards/PackageCard/PackageCard';
 import React from 'react';
@@ -11,11 +12,19 @@ interface CategoryData {
   packages?: Array<any>;
 }
 
-interface CategoryProps {
-  categoryData: CategoryData;
+interface BreadcrumbItem {
+  title: string;
+  slug: string;
 }
 
-export default function Category({ categoryData }: CategoryProps) {
+interface breadcrumbData extends Array<Array<BreadcrumbItem>> {}
+
+interface CategoryProps {
+  categoryData: CategoryData;
+  breadcrumb: breadcrumbData;
+}
+
+export default function Category({ categoryData, breadcrumb }: CategoryProps) {
   return (
     <div className="category-details">
       {categoryData.banner && <PageBanner banner={categoryData.banner} />}
@@ -23,10 +32,14 @@ export default function Category({ categoryData }: CategoryProps) {
       {categoryData.description && (
         <div className="common-box">
           <div className="container">
-            <div className="title text-center">
-              <h2
-                className="common-module mb-0"
-                dangerouslySetInnerHTML={{ __html: categoryData.title }}></h2>
+            <div className="common-module mb-0">
+              {breadcrumb && breadcrumb.length > 0 && (
+                <BreadCrumb breadcrumb={breadcrumb} />
+              )}
+              <div className="title text-center">
+                <h2
+                  dangerouslySetInnerHTML={{ __html: categoryData.title }}></h2>
+              </div>
             </div>
 
             {categoryData.description && (
