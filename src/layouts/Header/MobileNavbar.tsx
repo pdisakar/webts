@@ -54,13 +54,16 @@ const MenuItemComponent: React.FC<{
             onClick={() => toggleMenu(item.id, parentId)}
             className={`w-full flex justify-between items-center text-left ${fontWeight} hover:text-primary`}>
             {item.item_title}
-            <span className="h-5 w-5 bg-primary/20 rounded-full flex items-center justify-center transition-transform duration-300">
+            <span className="h-5 w-5 bg-primary/20 rounded-full flex items-center justify-center transition-transform duration-500">
               {isExpanded ? '-' : '+'}
             </span>
           </button>
           {isExpanded && (
-            <ul className="ml-3 mt-2 space-y-2">
-              {item.children!.map(child => (
+            <ul
+              className={` ml-3 mt-2 space-y-2 overflow-hidden transition-all duration-500 ease-in-out ${
+                isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+              } `}>
+              {item.children?.map(child => (
                 <MenuItemComponent
                   key={child.id}
                   item={child}
@@ -112,14 +115,18 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (
+        isMobileMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
         setIsMobileMenuOpen(false);
         setExpandedMenus({});
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -202,75 +209,91 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
           </div>
         </div>
 
-        {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-page-bg shadow-lg z-40 max-h-[calc(100vh-86px)] overflow-y-auto">
-            <div className="container pb-10 pt-3 text-headings">
-              <ul className="space-y-4">
-                {menuData.map(menu => (
-                  <MenuItemComponent
-                    key={menu.id}
-                    item={menu}
-                    parentId="root"
-                    expandedMenus={expandedMenus}
-                    toggleMenu={toggleMenu}
-                    setIsMobileMenuOpen={setIsMobileMenuOpen}
-                    level={1}
-                  />
-                ))}
-              </ul>
+        <div
+          className={`
+            absolute top-full left-0 w-full bg-page-bg shadow-lg z-40
+            overflow-y-auto transform transition-all duration-300 ease-in-out
+            ${
+              isMobileMenuOpen
+                ? 'max-h-[calc(100vh-86px)] opacity-100'
+                : 'max-h-0 opacity-0 pointer-events-none'
+            }
+          `}>
+          <div className="container pb-10 pt-3 text-headings">
+            <ul className="space-y-4">
+              {menuData.map(menu => (
+                <MenuItemComponent
+                  key={menu.id}
+                  item={menu}
+                  parentId="root"
+                  expandedMenus={expandedMenus}
+                  toggleMenu={toggleMenu}
+                  setIsMobileMenuOpen={setIsMobileMenuOpen}
+                  level={1}
+                />
+              ))}
+            </ul>
 
-              <div className="mt-10 py-2 border-y-[1.5px] border-primary border-dashed">
-                {globalData.email && (
-                  <div className="flex gap-2 items-center mt-3 text-sm">
-                    <svg
-                      className="icon text-primary shrink-0"
-                      width="18"
-                      height="18">
-                      <use
-                        xlinkHref="/icons.svg#sidepannel-mail"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    {globalData.email}
-                  </div>
-                )}
-                {globalData.phone && (
-                  <div className="flex gap-2 items-center mt-3 text-sm">
-                    <svg
-                      className="icon text-primary shrink-0"
-                      width="18"
-                      height="18">
-                      <use
-                        xlinkHref="/icons.svg#sidepannel-phone"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    {globalData.phone}
-                  </div>
-                )}
-                {globalData.address && (
-                  <div className="flex gap-2 items-start mt-3 text-sm">
-                    <svg
-                      className="icon text-primary shrink-0 mt-1"
-                      width="18"
-                      height="18">
-                      <use
-                        xlinkHref="/icons.svg#sidepannel-location"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span>{globalData.address}</span>
-                  </div>
-                )}
-              </div>
+            <div className="mt-10 py-2 border-y-[1.5px] border-primary border-dashed">
+              {globalData.email && (
+                <div className="flex gap-2 items-center mt-3 text-sm">
+                  <svg
+                    className="icon text-primary shrink-0"
+                    width="18"
+                    height="18">
+                    <use
+                      xlinkHref="/icons.svg#sidepannel-mail"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  {globalData.email}
+                </div>
+              )}
+              {globalData.phone && (
+                <div className="flex gap-2 items-center mt-3 text-sm">
+                  <svg
+                    className="icon text-primary shrink-0"
+                    width="18"
+                    height="18">
+                    <use
+                      xlinkHref="/icons.svg#sidepannel-phone"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  {globalData.phone}
+                </div>
+              )}
+              {globalData.address && (
+                <div className="flex gap-2 items-start mt-3 text-sm">
+                  <svg
+                    className="icon text-primary shrink-0 mt-1"
+                    width="18"
+                    height="18">
+                    <use
+                      xlinkHref="/icons.svg#sidepannel-location"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span>{globalData.address}</span>
+                </div>
+              )}
             </div>
           </div>
-        )}
+        </div>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-20 lg:hidden"></div>
-      )}
+      <div
+        className={`
+          fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-20 lg:hidden
+          transition-opacity duration-700 ease-in-out
+          ${
+            isMobileMenuOpen
+              ? 'opacity-100 pointer-events-auto'
+              : 'opacity-0 pointer-events-none'
+          }
+        `}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
     </>
   );
 };
