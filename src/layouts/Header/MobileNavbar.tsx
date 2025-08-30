@@ -26,12 +26,74 @@ interface MobileNavbarProps {
   optionalData?: Record<string, any>;
 }
 
+const MenuItemComponent: React.FC<{
+  item: MenuItem;
+  parentId: string | number;
+  expandedMenus: Record<string | number, string | number | null>;
+  toggleMenu: (id: string | number, parentId: string | number) => void;
+  setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  level?: number;
+}> = ({
+  item,
+  parentId,
+  expandedMenus,
+  toggleMenu,
+  setIsMobileMenuOpen,
+  level = 1,
+}) => {
+  const isExpanded = expandedMenus[parentId] === item.id;
+  const hasChildren = item.children && item.children.length > 0;
+  const fontWeight =
+    level === 1 ? 'font-bold' : level === 2 ? 'font-semibold' : 'font-medium';
+
+  return (
+    <li key={item.id}>
+      {hasChildren && level < 3 ? (
+        <>
+          <button
+            onClick={() => toggleMenu(item.id, parentId)}
+            className={`w-full flex justify-between items-center text-left ${fontWeight} hover:text-primary`}>
+            {item.item_title}
+            <span className="h-5 w-5 bg-primary/20 rounded-full flex items-center justify-center transition-transform duration-300">
+              {isExpanded ? '-' : '+'}
+            </span>
+          </button>
+          {isExpanded && (
+            <ul className="ml-3 mt-2 space-y-2">
+              {item.children!.map(child => (
+                <MenuItemComponent
+                  key={child.id}
+                  item={child}
+                  parentId={item.id}
+                  expandedMenus={expandedMenus}
+                  toggleMenu={toggleMenu}
+                  setIsMobileMenuOpen={setIsMobileMenuOpen}
+                  level={level + 1}
+                />
+              ))}
+            </ul>
+          )}
+        </>
+      ) : (
+        <Link
+          href={`/${item.url_segment || item.item_slug || ''}`}
+          className={`w-full block text-left ${fontWeight} hover:text-primary`}
+          onClick={() => setIsMobileMenuOpen(false)}>
+          {item.item_title}
+        </Link>
+      )}
+    </li>
+  );
+};
+
 const MobileNavbar: React.FC<MobileNavbarProps> = ({
   globalData,
   optionalData,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const [expandedMenus, setExpandedMenus] = useState<
+    Record<string | number, string | number | null>
+  >({});
   const menuRef = useRef<HTMLDivElement>(null);
 
   const menuData: MenuItem[] = globalData?.main_menu?.menu || [];
@@ -41,20 +103,18 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
     return () => document.body.classList.remove('overflow-hidden');
   }, [isMobileMenuOpen]);
 
-  const toggleMenu = (menuTitle?: string) => {
-    if (menuTitle) {
-      setExpandedMenu(prev => (prev === menuTitle ? null : menuTitle));
-    } else {
-      setIsMobileMenuOpen(prev => !prev);
-      if (isMobileMenuOpen) setExpandedMenu(null);
-    }
+  const toggleMenu = (id: string | number, parentId: string | number) => {
+    setExpandedMenus(prev => ({
+      ...prev,
+      [parentId]: prev[parentId] === id ? null : id,
+    }));
   };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMobileMenuOpen(false);
-        setExpandedMenu(null);
+        setExpandedMenus({});
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -103,7 +163,10 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
             )}
 
             <button
-              onClick={() => toggleMenu()}
+              onClick={() => {
+                setIsMobileMenuOpen(prev => !prev);
+                if (isMobileMenuOpen) setExpandedMenus({});
+              }}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               className="text-primary text-2xl focus:outline-none">
               {isMobileMenuOpen ? (
@@ -144,43 +207,15 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
             <div className="container pb-10 pt-3 text-headings">
               <ul className="space-y-4">
                 {menuData.map(menu => (
-                  <li key={menu.id}>
-                    {menu.children?.length ? (
-                      <>
-                        <button
-                          onClick={() => toggleMenu(menu.item_title)}
-                          className="w-full flex justify-between items-center text-left font-bold hover:text-primary">
-                          {menu.item_title}
-                          <span className="h-5 w-5 bg-primary/20 rounded-full flex items-center justify-center transition-transform duration-300">
-                            {expandedMenu === menu.item_title ? '-' : '+'}
-                          </span>
-                        </button>
-                        {expandedMenu === menu.item_title && (
-                          <ul className="ml-2 mt-2 space-y-2">
-                            {menu.children.map(child => (
-                              <li key={child.id}>
-                                <Link
-                                  href={`/${
-                                    child.url_segment || child.item_slug
-                                  }`}
-                                  className="text-sm hover:text-primary block py-1 pl-2"
-                                  onClick={() => setIsMobileMenuOpen(false)}>
-                                  {child.item_title}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </>
-                    ) : (
-                      <Link
-                        href={`/${menu.item_slug}`}
-                        className="w-full block text-left font-bold hover:text-primary"
-                        onClick={() => setIsMobileMenuOpen(false)}>
-                        {menu.item_title}
-                      </Link>
-                    )}
-                  </li>
+                  <MenuItemComponent
+                    key={menu.id}
+                    item={menu}
+                    parentId="root"
+                    expandedMenus={expandedMenus}
+                    toggleMenu={toggleMenu}
+                    setIsMobileMenuOpen={setIsMobileMenuOpen}
+                    level={1}
+                  />
                 ))}
               </ul>
 
