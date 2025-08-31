@@ -13,7 +13,7 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-interface GlobalData {
+interface GlobalDataContent {
   notification?: string;
   main_menu?: {
     menu: MenuItem[];
@@ -24,8 +24,16 @@ interface GlobalData {
   address?: string;
 }
 
-interface OptionalData {
+interface OptionalDataContent {
   [key: string]: any;
+}
+
+interface GlobalData {
+  data: GlobalDataContent;
+}
+
+interface OptionalData {
+  data: OptionalDataContent;
 }
 
 interface DesktopNavbarProps {
@@ -39,7 +47,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
 }) => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
-  const menuData = globalData?.main_menu?.menu ?? [];
+  const menuData = globalData?.data?.main_menu?.menu ?? [];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -66,7 +74,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
           <Image
             src="/logo.png"
             alt="Logo"
-            title='logo'
+            title="logo"
             width={88}
             height={110}
             className="logo"
@@ -179,7 +187,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
 
       <div className="quick-access flex items-center gap-6 py-6">
         <a
-          href={`https://wa.me/${globalData?.mobile ?? ''}`}
+          href={`https://wa.me/${globalData?.data?.mobile ?? ''}`}
           target="_blank"
           rel="noopener noreferrer"
           className="quick-contact flex items-center gap-2">
@@ -196,7 +204,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
               Call or WhatsApp
             </span>
             <span className="leading-[1] text-primary">
-              {globalData?.mobile}
+              {globalData?.data?.mobile}
             </span>
           </div>
         </a>

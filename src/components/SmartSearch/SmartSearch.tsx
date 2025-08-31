@@ -8,9 +8,13 @@ interface PackageItem {
   slug: string;
 }
 
-interface OptionalData {
+interface OptionalDataContent {
   package?: PackageItem[];
   [key: string]: any;
+}
+
+interface OptionalData {
+  data: OptionalDataContent;
 }
 
 interface SmartSearchProps {
@@ -44,7 +48,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
     }
 
     setLoading(true);
-    const searchableData = optionalData?.package || [];
+    const searchableData = optionalData?.data?.package || [];
     const lowerQ = q.trim().toLowerCase();
     const results = searchableData
       .filter(pkg => pkg.title.toLowerCase().includes(lowerQ))

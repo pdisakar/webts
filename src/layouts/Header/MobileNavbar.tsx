@@ -12,7 +12,7 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-interface GlobalData {
+interface GlobalDataContent {
   main_menu?: {
     menu: MenuItem[];
   };
@@ -21,9 +21,21 @@ interface GlobalData {
   address?: string;
 }
 
+interface OptionalDataContent {
+  [key: string]: any;
+}
+
+interface GlobalData {
+  data: GlobalDataContent;
+}
+
+interface OptionalData {
+  data: OptionalDataContent;
+}
+
 interface MobileNavbarProps {
   globalData: GlobalData;
-  optionalData?: Record<string, any>;
+  optionalData: OptionalData;
 }
 
 const MenuItemComponent: React.FC<{
@@ -44,7 +56,11 @@ const MenuItemComponent: React.FC<{
   const isExpanded = expandedMenus[parentId] === item.id;
   const hasChildren = item.children && item.children.length > 0;
   const fontWeight =
-    level === 1 ? 'font-bold' : level === 2 ? 'font-semibold' : 'font-medium';
+    level === 1
+      ? 'font-bold'
+      : level === 2
+      ? 'font-semibold text-[15px]'
+      : 'font-medium text-[14px]';
 
   return (
     <li key={item.id}>
@@ -99,7 +115,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
   >({});
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const menuData: MenuItem[] = globalData?.main_menu?.menu || [];
+  const menuData: MenuItem[] = globalData?.data.main_menu?.menu || [];
 
   useEffect(() => {
     document.body.classList.toggle('overflow-hidden', isMobileMenuOpen);
@@ -149,11 +165,11 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
           </Link>
 
           <div className="flex items-center gap-5">
-            <SmartSearch optionalData={optionalData ?? {}} />
+            <SmartSearch optionalData={optionalData ?? { data: {} }} />
 
-            {globalData.phone && (
+            {globalData?.data?.phone && (
               <a
-                href={`https://wa.me/${globalData.phone}`}
+                href={`https://wa.me/${globalData.data.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-primary">
@@ -235,7 +251,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
             </ul>
 
             <div className="mt-10 py-2 border-y-[1.5px] border-primary border-dashed">
-              {globalData.email && (
+              {globalData.data.email && (
                 <div className="flex gap-2 items-center mt-3 text-sm">
                   <svg
                     className="icon text-primary shrink-0"
@@ -246,10 +262,10 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                       fill="currentColor"
                     />
                   </svg>
-                  {globalData.email}
+                  {globalData.data.email}
                 </div>
               )}
-              {globalData.phone && (
+              {globalData.data.phone && (
                 <div className="flex gap-2 items-center mt-3 text-sm">
                   <svg
                     className="icon text-primary shrink-0"
@@ -260,10 +276,10 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                       fill="currentColor"
                     />
                   </svg>
-                  {globalData.phone}
+                  {globalData.data.phone}
                 </div>
               )}
-              {globalData.address && (
+              {globalData.data.address && (
                 <div className="flex gap-2 items-start mt-3 text-sm">
                   <svg
                     className="icon text-primary shrink-0 mt-1"
@@ -274,7 +290,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                       fill="currentColor"
                     />
                   </svg>
-                  <span>{globalData.address}</span>
+                  <span>{globalData.data.address}</span>
                 </div>
               )}
             </div>

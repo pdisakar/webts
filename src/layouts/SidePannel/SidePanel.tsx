@@ -3,11 +3,16 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
 
-interface GlobalData {
+
+interface GlobalDataContent {
   mobile?: string;
   phone?: string;
   email?: string;
   address?: string;
+}
+
+interface GlobalData {
+  data: GlobalDataContent;
 }
 
 interface SidePanelProps {
@@ -82,7 +87,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ globalData }) => {
             <div className="contact-us-section my-6 py-6 border-y-[1.5px] border-primary border-dashed">
               <h3 className="text-headings text-xl font-bold">Contact Us</h3>
 
-              {globalData.email && (
+              {globalData.data.email && (
                 <div className="email flex gap-3 mt-3">
                   <svg
                     className="icon text-primary shrink-0"
@@ -93,11 +98,11 @@ const SidePanel: React.FC<SidePanelProps> = ({ globalData }) => {
                       fill="currentColor"
                     />
                   </svg>
-                  {globalData.email}
+                  {globalData.data.email}
                 </div>
               )}
 
-              {(globalData.mobile || globalData.phone) && (
+              {(globalData.data.mobile || globalData.data.phone) && (
                 <div className="phone-number flex gap-3 mt-3">
                   <svg
                     className="icon text-primary shrink-0"
@@ -108,11 +113,11 @@ const SidePanel: React.FC<SidePanelProps> = ({ globalData }) => {
                       fill="currentColor"
                     />
                   </svg>
-                  {globalData.mobile ?? globalData.phone}
+                  {globalData.data.mobile ?? globalData.data.phone}
                 </div>
               )}
 
-              {globalData.address && (
+              {globalData.data.address && (
                 <div className="company-address flex gap-3 mt-3">
                   <svg
                     className="icon text-primary shrink-0"
@@ -123,7 +128,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ globalData }) => {
                       fill="currentColor"
                     />
                   </svg>
-                  {globalData.address}
+                  {globalData.data.address}
                 </div>
               )}
             </div>

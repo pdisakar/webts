@@ -11,7 +11,7 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-interface GlobalData {
+interface GlobalDataContent {
   notification?: string;
   main_menu?: {
     menu: MenuItem[];
@@ -22,8 +22,16 @@ interface GlobalData {
   address?: string;
 }
 
-interface OptionalData {
+interface OptionalDataContent {
   [key: string]: any;
+}
+
+interface GlobalData {
+  data: GlobalDataContent;
+}
+
+interface OptionalData {
+  data: OptionalDataContent;
 }
 
 interface HeaderProps {
@@ -37,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ globalData, optionalData }) => {
       className="header relative bg-page-bg"
       id="header">
       <div className="desktop-header hidden lg:block">
-        <Notification message={globalData?.notification} />
+        <Notification message={globalData?.data?.notification} />
 
         <DesktopNavbar
           globalData={globalData}
