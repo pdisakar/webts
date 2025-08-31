@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import Link from 'next/link';
 
 export interface Package {
@@ -18,35 +18,42 @@ interface HomeSearchProps {
 }
 
 const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
-  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
   const [filtered, setFiltered] = useState<Package[]>([]);
+  const [searching, setSearching] = useState(false);
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setQuery('');
     setFiltered([]);
+    setSearching(false);
   }, [optionalData]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const q = e.target.value;
     setQuery(q);
 
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
     if (q.trim().length < 3) {
       setFiltered([]);
-      setLoading(false);
+      setSearching(false);
       return;
     }
 
-    setLoading(true);
-    const searchableData = optionalData?.package || [];
-    const lowerQ = q.trim().toLowerCase();
+    setSearching(true);
 
-    const results = searchableData
-      .filter(pkg => pkg.title.toLowerCase().includes(lowerQ))
-      .slice(0, 10);
+    // debounce search by 500ms
+    debounceRef.current = setTimeout(() => {
+      const searchableData = optionalData?.package || [];
+      const lowerQ = q.trim().toLowerCase();
+      const results = searchableData
+        .filter(pkg => pkg.title.toLowerCase().includes(lowerQ))
+        .slice(0, 10);
 
-    setFiltered(results);
-    setLoading(false);
+      setFiltered(results);
+      setSearching(false);
+    }, 500);
   };
 
   return (
@@ -75,13 +82,16 @@ const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
 
           {query.trim().length > 2 && (
             <div className="absolute top-full left-0 w-full bg-white shadow-lg rounded-lg mt-2 z-10 max-h-[300px] overflow-auto border border-border custom-scrollbar">
-              {filtered.length > 0 ? (
+              {searching ? (
+                <p className="text-center text-muted p-4">
+                  Searching for &quot;{query}&quot;...
+                </p>
+              ) : filtered.length > 0 ? (
                 <ul>
                   {filtered.map(pkg => (
                     <li
                       className="py-3 px-6 border-primary/70 border-dashed border-b last:border-b-0 hover:bg-primary/5 transition-colors"
-                      key={pkg.id}
-                      id={`package-${pkg.id}`}>
+                      key={pkg.id}>
                       <Link
                         href={`/${pkg.slug}`}
                         className="block w-full">
@@ -99,6 +109,7 @@ const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
               )}
             </div>
           )}
+
           <button
             type="submit"
             className="bg-primary px-[18px] flex items-center gap-2 rounded-r-md text-white py-3 absolute top-0 right-0"

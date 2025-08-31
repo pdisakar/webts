@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
 import Link from 'next/link';
 
 interface PackageItem {
@@ -23,10 +23,12 @@ interface SmartSearchProps {
 }
 
 const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
-  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
   const [filtered, setFiltered] = useState<PackageItem[]>([]);
+  const [searching, setSearching] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (showSearch) {
@@ -41,21 +43,26 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
     const q = e.target.value;
     setQuery(q);
 
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
     if (q.trim().length < 3) {
       setFiltered([]);
-      setLoading(false);
+      setSearching(false);
       return;
     }
 
-    setLoading(true);
-    const searchableData = optionalData?.data?.package || [];
-    const lowerQ = q.trim().toLowerCase();
-    const results = searchableData
-      .filter(pkg => pkg.title.toLowerCase().includes(lowerQ))
-      .slice(0, 10);
+    setSearching(true);
 
-    setFiltered(results);
-    setLoading(false);
+    debounceRef.current = setTimeout(() => {
+      const searchableData = optionalData?.data?.package || [];
+      const lowerQ = q.trim().toLowerCase();
+      const results = searchableData
+        .filter(pkg => pkg.title.toLowerCase().includes(lowerQ))
+        .slice(0, 10);
+
+      setFiltered(results);
+      setSearching(false);
+    }, 500);
   };
 
   const closeSearch = () => {
@@ -102,35 +109,17 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
                   value={query}
                   onChange={handleChange}
                   className="form-control border-none bg-page-bg focus:border-primary focus:ring-0 outline-none rounded-md rounded-r-lg w-full px-6 py-3 placeholder:text-muted placeholder:capitalize"
-                  placeholder="Find your perfect quiet retreat ?"
+                  placeholder="Find your perfect quiet retreat?"
                   autoComplete="off"
                 />
-                <button
-                  type="submit"
-                  className="bg-primary px-[18px] flex items-center gap-2 rounded-r-md text-white py-3 absolute top-0 right-0 z-10"
-                  aria-label="Search">
-                  {loading ? (
-                    <div className="spinner-border h-5 w-5 border-t-2 border-white rounded-full animate-spin"></div>
-                  ) : (
-                    <>
-                      <svg
-                        className="icon text-white"
-                        width="20"
-                        height="20"
-                        aria-hidden="true">
-                        <use
-                          xlinkHref="/icons.svg#search"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      <span>Search</span>
-                    </>
-                  )}
-                </button>
 
                 {query.trim().length > 2 && (
                   <div className="absolute top-full left-0 w-full bg-white shadow-lg rounded-lg mt-2 z-[60] max-h-[300px] overflow-auto border border-border custom-scrollbar">
-                    {filtered.length > 0 ? (
+                    {searching ? (
+                      <p className="text-center text-muted p-4">
+                        Searching for &quot;{query}&quot;...
+                      </p>
+                    ) : filtered.length > 0 ? (
                       <ul>
                         {filtered.map(pkg => (
                           <li
@@ -154,6 +143,23 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
                     )}
                   </div>
                 )}
+
+                <button
+                  type="submit"
+                  className="bg-primary px-[18px] flex items-center gap-2 rounded-r-md text-white py-3 absolute top-0 right-0 z-10"
+                  aria-label="Search">
+                  <svg
+                    className="icon text-white"
+                    width="20"
+                    height="20"
+                    aria-hidden="true">
+                    <use
+                      xlinkHref="/icons.svg#search"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span>Search</span>
+                </button>
               </div>
             </form>
           </div>
