@@ -66,7 +66,7 @@ const BlogList: React.FC<BlogListProps> = ({ initialPosts }) => {
 
       {noData && (
         <p className="text-center font-bold">
-          <b>No more testimonials to show!</b>
+          <b>No more Blogs to show!</b>
         </p>
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}

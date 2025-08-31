@@ -1,5 +1,6 @@
 import React from 'react';
 import TestimonialsCard from '../Cards/TestimonialsCard/TestimonialsCard';
+import PrimaryButton from '../Buttons/PrimaryButton'; // Adjust the path if needed
 
 interface Testimonial {
   id: string | number;
@@ -47,6 +48,12 @@ const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({
               testimonial={testimonial}
             />
           ))}
+        </div>
+        <div className="action-btn relative flex justify-center mt-12 after:absolute after:top-1/2 after:left-1/2 after:-translate-y-1/2 after:-translate-x-1/2 after:content-[''] after:w-full after:h-[1px] after:bg-dottedline after:-z-10">
+          <PrimaryButton
+            href="/testimonials"
+            label="Read All Reviews"
+          />
         </div>
       </div>
     </div>
