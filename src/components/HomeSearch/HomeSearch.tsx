@@ -84,7 +84,7 @@ const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
             <div className="absolute top-full left-0 w-full bg-white shadow-lg rounded-lg mt-2 z-10 max-h-[300px] overflow-auto border border-border custom-scrollbar">
               {searching ? (
                 <p className="text-center text-muted p-4">
-                  Searching for &quot;{query}&quot;...
+                  Searching for &quot;{query}&quot;
                 </p>
               ) : filtered.length > 0 ? (
                 <ul>
