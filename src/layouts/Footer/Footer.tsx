@@ -43,7 +43,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
         <div className="container">
           <div className="main-footer">
             <ul className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {globalData?.footer_menu?.menu
+              {globalData?.data.footer_menu?.menu
                 ?.slice(0, 4)
                 .map((section: FooterMenuSection) => (
                   <li key={section.id}>
@@ -90,7 +90,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
             </div>
             <div className="company-info">
               <h3 className=" text-xl font-bold text-headings/85">
-                {globalData?.company_name}
+                {globalData?.data.company_name}
               </h3>
               <ul className=" mt-6 [&>li+li]:mt-[18px] [&>li]:flex [&>li]:gap-3 font-light text-text-color/85">
                 <li className="company-address">
@@ -105,7 +105,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                   </svg>
                   <div className="company-address-details">
                     <p className="text-sm">Address</p>
-                    <p className="font-medium">{globalData?.address}</p>
+                    <p className="font-medium">{globalData?.data.address}</p>
                   </div>
                 </li>
                 <li className="company-phone">
@@ -120,7 +120,7 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                   </svg>
                   <div className="company-phone-details">
                     <p className="text-sm">Contact Number</p>
-                    <p className="font-medium">{globalData?.phone}</p>
+                    <p className="font-medium">{globalData?.data.phone}</p>
                   </div>
                 </li>
                 <li className="company-email">
@@ -137,8 +137,8 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                     <p className="text-sm">Mail Us</p>
                     <a
                       className="font-medium break-all"
-                      href={`mailto:${globalData?.email}`}>
-                      <span>{globalData?.email}</span>
+                      href={`mailto:${globalData?.data.email}`}>
+                      <span>{globalData?.data.email}</span>
                     </a>
                   </div>
                 </li>

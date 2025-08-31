@@ -1,5 +1,3 @@
-// /app/testimonials/page.tsx
-
 import React from 'react';
 import { getAllTestimonials } from '@/services/network_requests';
 import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';

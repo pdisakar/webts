@@ -13,21 +13,22 @@ const platforms = [
 type Platform = (typeof platforms)[number];
 
 interface SocialMediaProps {
-  globalData?: Partial<Record<Platform, string>> & { [key: string]: any };
+  globalData?: {
+    data?: Partial<Record<Platform, string>> & { [key: string]: any };
+    [key: string]: any;
+  };
 }
 
 const SocialMedia: React.FC<SocialMediaProps> = ({ globalData = {} }) => {
+  const data = globalData.data || {};
+
   return (
     <ul className="flex gap-[8px]">
       {platforms.map(platform => {
-        const url = globalData[platform];
+        const url = data[platform];
 
         const icon = (
-          <svg
-            className="icon"
-            width="32"
-            height="32"
-            fill="currentColor">
+          <svg className="icon" width="32" height="32" fill="currentColor">
             <use xlinkHref={`/icons.svg#${platform}`} />
           </svg>
         );
@@ -39,7 +40,8 @@ const SocialMedia: React.FC<SocialMediaProps> = ({ globalData = {} }) => {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Visit our ${platform} page`}>
+                aria-label={`Visit our ${platform} page`}
+              >
                 {icon}
               </a>
             ) : (
