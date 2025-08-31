@@ -171,23 +171,30 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
         </Link>
 
         <div className="flex items-center gap-4">
-          <div className="quick-contact flex items-center gap-2">
-            <a
-              href={`https://wa.me/${globalData.data.phone}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Contact us on WhatsApp">
-              <svg
-                className="icon text-primary"
-                width="26"
-                height="26">
-                <use
-                  xlinkHref="/icons.svg#whatsapp"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
-          </div>
+          <a
+            href={`https://wa.me/${globalData?.data?.mobile ?? ''}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="quick-contact flex items-center gap-2">
+            <svg
+              className="icon text-primary"
+              width="30"
+              height="30">
+              <use
+                xlinkHref="/icons.svg#whatsapp"
+                fill="currentColor"></use>
+            </svg>
+            <div className="contact-info hidden sm:block">
+              <div className='flex flex-col font-semibold gap-[6px]'>
+              <span className="leading-[1] text-[13px] text-headings">
+                Call or WhatsApp
+              </span>
+              <span className="leading-[1] text-primary">
+                {globalData?.data?.mobile}
+              </span>
+              </div>
+            </div>
+          </a>
 
           <SmartSearch optionalData={optionalData} />
 
