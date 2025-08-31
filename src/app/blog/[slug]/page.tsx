@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getBlogBySlug } from '@/services/network_requests';
 import PageBanner from '@/components/Banners/PageBanner';
 import { format } from 'date-fns';
+import BreadCrumbPackage from '@/components/BreadCrumb/BreadCrumbPackage';
 
 interface BlogAuthor {
   name?: string;
@@ -88,13 +89,30 @@ const Page = async ({ params }: ParamsPromise) => {
 
   const bannerData = data.banner;
 
+  const breadcrumb = {
+    '1': [
+      {
+        title: 'Blog',
+        slug: 'blog',
+      },
+    ],
+  };
+
   return (
     <div className="blog-page">
       {bannerData && <PageBanner banner={bannerData} />}
       <div className="container">
         <div className="main-container lg:w-4/5 lg:mx-auto">
-          <div className="title pt-8">
-            <h1>{data.title}</h1>
+          <div className="pt-8 pb-4">
+            <div className="common-module mb-0">
+              <BreadCrumbPackage
+                breadcrumb={breadcrumb}
+                currentpage={data.title}
+              />
+              <div className="title">
+                <h1>{data.title}</h1>
+              </div>
+            </div>
             <div className="blog-author-details text-sm text-muted flex items-center justify-between py-3 border-y border-border border-dashed mt-2">
               <div className="author flex items-center">
                 <div className="w-[32px] h-[32px] border border-primary rounded-full p-[2px] shrink-0 mr-2">

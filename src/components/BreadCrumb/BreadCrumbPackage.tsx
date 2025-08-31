@@ -24,18 +24,7 @@ const BreadCrumbPackage = ({
           <li className="flex items-center">
             <Link href="/">Home</Link>
             {(breadcrumbItems.length > 0 || currentpage) && (
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                className="text-muted mx-1"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <use
-                  xlinkHref="./icons.svg#breadcrumb"
-                  fill="currentColor"
-                />
-              </svg>
+              <span className="px-1">/</span>
             )}
           </li>
 
@@ -44,18 +33,7 @@ const BreadCrumbPackage = ({
               key={index}
               className="flex items-center">
               <Link href={`/${item.slug}`}>{item.title}</Link>
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                className="text-muted mx-1"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <use
-                  xlinkHref="./icons.svg#breadcrumb"
-                  fill="currentColor"
-                />
-              </svg>
+              <span className="px-1">/</span>
             </li>
           ))}
 

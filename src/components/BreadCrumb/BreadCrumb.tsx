@@ -16,26 +16,13 @@ const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
   const breadcrumbItems = breadcrumb[0];
   const lastItem = breadcrumbItems[breadcrumbItems.length - 1];
 
-  console.log(breadcrumb);
-
   return (
     <div className="breadcrumb-container">
       <nav aria-label="breadcrumb">
         <ul className="flex items-center text-[13px] font-semibold text-muted [&>li:last-child]:text-primary">
           <li className="flex items-center">
             <Link href="/">Home</Link>
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              className="text-muted mx-1"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <use
-                xlinkHref="./icons.svg#breadcrumb"
-                fill="currentColor"
-              />
-            </svg>
+            <span className='px-1'>/</span>
           </li>
 
           <li className="flex items-center">
