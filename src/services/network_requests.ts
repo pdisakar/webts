@@ -68,3 +68,13 @@ export async function getAllMembers() {
     })
     .catch(err => err);
 }
+
+// to get all testimonials
+export async function getAllTestimonials(limit: number = 6): Promise<any> {
+  try {
+    const res = await client.get(`/alltestimonials?_limit=${limit}`);
+    return res;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}

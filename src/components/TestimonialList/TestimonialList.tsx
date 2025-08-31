@@ -2,30 +2,25 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import BlogCard from '../Cards/BlogCard/BlogCard';
-import { PRODUCTION_SERVER, SITE_KEY } from '@/lib/constants';
+import TestimonialsCard from '../Cards/TestimonialsCard/TestimonialsCard'; // Adjust the import path as needed
+import { PRODUCTION_SERVER, SITE_KEY } from '@/lib/constants'; // Adjust the import path as needed
 
-export interface BlogAuthor {
-  name?: string;
+export interface Testimonial {
+  id?: string | number;
+  full_name: string;
+  created_at: string | Date;
+  review: string;
+  urlinfo: {
+    url_title: string;
+  };
 }
 
-export interface BlogItemType {
-  id: string | number;
-  title: string;
-  summary?: string;
-  blog_date: string | Date;
-  urlinfo: { url_slug: string };
-  featured?: { full_path: string };
-  authors?: BlogAuthor[];
-  [key: string]: any;
+interface TestimonialListProps {
+  initialPosts: Testimonial[];
 }
 
-interface BlogListProps {
-  initialPosts: BlogItemType[];
-}
-
-const BlogList: React.FC<BlogListProps> = ({ initialPosts }) => {
-  const [posts, setPosts] = useState<BlogItemType[]>(initialPosts);
+const TestimonialList: React.FC<TestimonialListProps> = ({ initialPosts }) => {
+  const [posts, setPosts] = useState<Testimonial[]>(initialPosts);
   const [isLoading, setIsLoading] = useState(false);
   const [noData, setNoData] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -34,16 +29,17 @@ const BlogList: React.FC<BlogListProps> = ({ initialPosts }) => {
     setIsLoading(true);
 
     try {
+      // The API endpoint is assumed to be '/alltestimonials' based on the pattern from BlogList
       const response = await axios.get(
-        `${PRODUCTION_SERVER}/allblogs?_start=${posts.length}&_limit=6`,
+        `${PRODUCTION_SERVER}/alltestimonials?_start=${posts.length}&_limit=6`,
         { headers: { sitekey: SITE_KEY } }
       );
 
-      const newPost: BlogItemType[] = response.data?.data.content || [];
+      const newPosts: Testimonial[] = response.data?.data.content || [];
 
-      setPosts(prevPosts => [...prevPosts, ...newPost]);
+      setPosts(prevPosts => [...prevPosts, ...newPosts]);
 
-      if (newPost.length === 0) {
+      if (newPosts.length === 0) {
         setNoData(true);
       }
     } catch (err: any) {
@@ -55,28 +51,28 @@ const BlogList: React.FC<BlogListProps> = ({ initialPosts }) => {
 
   return (
     <div className="container">
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         {posts.map((item, idx) => (
-          <BlogCard
-            blog={item}
+          <TestimonialsCard
+            testimonial={item}
             key={idx}
           />
         ))}
-      </ul>
+      </div>
 
       {noData && (
         <p className="text-center font-bold">
           <b>No more testimonials to show!</b>
         </p>
       )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="text-center text-red-600">{error}</p>}
 
       {!noData && (
         <div className="text-center">
           <button
             onClick={loadMore}
             disabled={isLoading}
-            aria-label="Load more"
+            aria-label="Load more testimonials"
             className="py-[14px] px-[26px] bg-primary rounded-full text-white font-bold leading-[1] capitalize border-b-[3px] border-r-[3px] border-[#5C6554]">
             {isLoading ? 'Loading...' : 'Load More'}
           </button>
@@ -86,4 +82,4 @@ const BlogList: React.FC<BlogListProps> = ({ initialPosts }) => {
   );
 };
 
-export default BlogList;
+export default TestimonialList;

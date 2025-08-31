@@ -46,32 +46,6 @@ export interface BlogPageData {
   [key: string]: any;
 }
 
-export async function generateMetadata() {
-  const response = await getBlogPage();
-  const data: BlogPageData = response.data.data;
-
-  return {
-    title: data.pagecontent.meta.meta_title,
-    description: data.pagecontent.meta.meta_description,
-    alternates: {
-      canonical: `${process.env.CANONICAL_BASE}/travel-guide/${data.pagecontent.urlinfo.url_slug}`,
-    },
-    openGraph: {
-      title: data.pagecontent.meta.meta_title,
-      description: data.pagecontent.meta.meta_description,
-      url: `${BASE_URL}/travel-guide/${data.pagecontent.urlinfo.url_slug}`,
-      ...(data.pagecontent.banner && {
-        images: [
-          {
-            url: `${IMAGE_URL}${data.pagecontent.banner.full_path}`,
-            width: 1650,
-            height: 600,
-          },
-        ],
-      }),
-    },
-  };
-}
 
 const Page: React.FC = async () => {
   const response = await getBlogPage();
