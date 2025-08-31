@@ -78,8 +78,8 @@ const SidePanel: React.FC<SidePanelProps> = ({ globalData }) => {
             src="/logo.png"
             alt="Logo"
             title="logo"
-            width={90}
-            height={87}
+            width={88}
+            height={110}
             className="logo mb-8"
           />
 
