@@ -18,10 +18,8 @@ export const metadata = {
   applicationName: process.env.COMPANY_NAME || 'Default Application',
   creator: process.env.COMPANY_NAME || 'Default Creator',
   publisher: process.env.COMPANY_NAME || 'Default Publisher',
-  // Remove themeColor from here
 };
 
-// Export themeColor separately
 export const themeColor = [
   { media: '(prefers-color-scheme: light)', color: 'white' },
   { media: '(prefers-color-scheme: dark)', color: 'black' },

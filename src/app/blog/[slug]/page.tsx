@@ -23,12 +23,10 @@ interface BlogContent {
   [key: string]: any;
 }
 
-// Next.js App Router: params are promises
 interface ParamsPromise {
   params: Promise<{ slug: string }>;
 }
 
-// Metadata generation
 export async function generateMetadata({ params }: ParamsPromise) {
   const { slug } = await params;
 
@@ -72,7 +70,6 @@ export async function generateMetadata({ params }: ParamsPromise) {
   };
 }
 
-// Page component
 const Page = async ({ params }: ParamsPromise) => {
   const { slug } = await params;
 
