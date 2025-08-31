@@ -1,6 +1,7 @@
 import React from 'react';
 import { getBlogPage } from '@/services/network_requests';
 import BlogList from '@/components/BlogList/BlogList';
+import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 
 const IMAGE_URL = process.env.IMAGE_URL || '';
 const BASE_URL = process.env.BASE_URL || '';
@@ -75,16 +76,31 @@ export async function generateMetadata() {
 const Page: React.FC = async () => {
   const response = await getBlogPage();
   const data: BlogPageData = response.data.data;
-
   const initialData: Blog[] = data.listcontent;
+
+  const breadcrumb = [
+    [
+      {
+        title: 'Blog',
+        slug: 'blog',
+      },
+    ],
+  ];
 
   return (
     <div className="blog-body">
-      <div className="container">
-        <div className="title pt-8 text-center">
-          <h1>Our Blogs</h1>
+      <div className="common-box">
+        <div className="container">
+          <div className="common-module">
+            <div className=" flex justify-center">
+              <BreadCrumb breadcrumb={breadcrumb} />
+            </div>
+            <div className="title text-center">
+              <h1>Our Blog</h1>
+            </div>
+          </div>
+          <BlogList initialPosts={initialData} />
         </div>
-        <BlogList initialPosts={initialData} />
       </div>
     </div>
   );

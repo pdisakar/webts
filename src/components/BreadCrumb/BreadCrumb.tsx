@@ -16,6 +16,8 @@ const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
   const breadcrumbItems = breadcrumb[0];
   const lastItem = breadcrumbItems[breadcrumbItems.length - 1];
 
+  console.log(breadcrumb);
+
   return (
     <div className="breadcrumb-container">
       <nav aria-label="breadcrumb">
@@ -29,7 +31,10 @@ const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
               className="text-muted mx-1"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
-              <use xlinkHref="./icons.svg#breadcrumb" fill="currentColor" />
+              <use
+                xlinkHref="./icons.svg#breadcrumb"
+                fill="currentColor"
+              />
             </svg>
           </li>
 
