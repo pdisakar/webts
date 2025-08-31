@@ -7,6 +7,8 @@ import { getGlobalData, getOptionsData } from '@/services/network_requests';
 import Header from '@/layouts/Header/Header';
 import Footer from '@/layouts/Footer/Footer';
 
+export const revalidate = 300;
+
 const dmSans = DM_Sans({
   variable: '--primary',
   weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
@@ -33,8 +35,8 @@ export default async function RootLayout({
     getOptionsData(),
   ]);
 
-  const data = globalDataResponse.data?.data;
-  const optionsData = optionsDataResponse.data?.data;
+  const globalData = globalDataResponse?.data; 
+  const optionsData = optionsDataResponse?.data;
 
   return (
     <html lang="en">
@@ -51,10 +53,10 @@ export default async function RootLayout({
         />
         <Header
           optionalData={optionsData}
-          globalData={data}
+          globalData={globalData}
         />
         {children}
-        <Footer globalData={data} />
+        <Footer globalData={globalData} />
       </body>
     </html>
   );
