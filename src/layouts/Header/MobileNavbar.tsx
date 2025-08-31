@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SmartSearch from '@/components/SmartSearch/SmartSearch';
+import PrimaryButton from '@/components/Buttons/PrimaryButton';
 
 interface MenuItem {
   id: string | number;
@@ -185,13 +186,13 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                 fill="currentColor"></use>
             </svg>
             <div className="contact-info hidden sm:block">
-              <div className='flex flex-col font-semibold gap-[6px]'>
-              <span className="leading-[1] text-[13px] text-headings">
-                Call or WhatsApp
-              </span>
-              <span className="leading-[1] text-primary">
-                {globalData?.data?.mobile}
-              </span>
+              <div className="flex flex-col font-semibold gap-[6px]">
+                <span className="leading-[1] text-[13px] text-headings">
+                  Call or WhatsApp
+                </span>
+                <span className="leading-[1] text-primary">
+                  {globalData?.data?.mobile}
+                </span>
               </div>
             </div>
           </a>
@@ -200,7 +201,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
 
           <button
             onClick={toggleMenu}
-            className="text-primary hover:text-secondary text-2xl focus:outline-none"
+            className="text-primary text-2xl focus:outline-none"
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}>
             {isMenuOpen ? (
               <svg
@@ -242,7 +243,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
           !isMenuOpen ? 'pointer-events-none' : ''
         }`}>
         <div
-          className={`transition-transform duration-300 ease-in-out bg-page-bg p-4 max-h-[calc(100vh-80px)] overflow-y-auto ${
+          className={`transition-transform duration-300 ease-in-out bg-page-bg p-4 pb-7 max-h-[calc(100vh-80px)] overflow-y-auto ${
             isMenuOpen ? 'translate-y-0' : '-translate-y-full'
           }`}>
           <MobileMenuList
