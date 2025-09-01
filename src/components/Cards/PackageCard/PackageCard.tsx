@@ -32,7 +32,8 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg }) => {
             src={IMAGE_URL + pkg.featured?.full_path}
             title={pkg.package_title}
             alt={pkg.package_title}
-            fill
+            width={640}
+            height={648}
             className="object-cover group-hover:scale-110 transition-transform duration-400 ease-in"
             priority
             sizes="(max-width: 640px) 100vw,
