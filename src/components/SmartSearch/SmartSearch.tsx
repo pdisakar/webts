@@ -88,7 +88,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
 
       {showSearch && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-center pt-32"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-32"
           onClick={closeSearch}>
           <div
             className="w-full max-w-4xl px-4 relative"

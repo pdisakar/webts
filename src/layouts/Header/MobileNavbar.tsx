@@ -295,7 +295,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
 
       <div
         onClick={toggleMenu}
-        className={`fixed inset-0 z-30 bg-black bg-opacity-20 backdrop-blur-sm transition-opacity duration-300 ease-in-out ${
+        className={`fixed inset-0 z-30 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity duration-300 ease-in-out ${
           isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />

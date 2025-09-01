@@ -52,7 +52,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ globalData }) => {
 
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/60 bg-opacity-30 backdrop-blur-sm z-40"
+          className="fixed inset-0 bg-black/50 bg-opacity-30 backdrop-blur-sm z-40"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />
