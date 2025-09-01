@@ -11,7 +11,7 @@ interface HomeBannerProps {
 const HomeBanner: React.FC<HomeBannerProps> = ({ optionalData }) => {
   return (
     <section className="hero-section px-0 lg:px-6">
-      <figure className="image-slot before:aspect-[1856/750] w-full mx-auto relative">
+      <figure className="image-slot before:aspect-[1856/750] w-full mx-auto relative min-h-[375px]">
         <Image
           src="/banner.webp"
           alt="Hero"
