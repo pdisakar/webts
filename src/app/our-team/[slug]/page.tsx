@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { cache } from 'react';
+import Link from 'next/link';
 
 const IMAGE_URL = process.env.IMAGE_URL || '';
 const BASE_URL = process.env.BASE_URL || '';
@@ -132,7 +133,9 @@ export default async function Slug({ params }: SlugParams) {
           </div>
 
           <div className="user-description col-span-4 md:col-span-3">
-            <article dangerouslySetInnerHTML={{ __html: data.description }} />
+            <article className='mb-6' dangerouslySetInnerHTML={{ __html: data.description }} />
+
+            <Link href="/our-team" className='mt-6 px-5 py-3 bg-primary text-white rounded-md font-bold '>Back To Team</Link>
           </div>
         </div>
       </div>
