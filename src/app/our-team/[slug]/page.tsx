@@ -116,7 +116,6 @@ export default async function Slug({ params }: SlugParams) {
                     width={256}
                     height={256}
                     className="object-cover"
-                    priority
                     sizes="(max-width: 256px) 100vw, (max-width: 256px) 50vw, 256px"
                   />
                 </figure>
