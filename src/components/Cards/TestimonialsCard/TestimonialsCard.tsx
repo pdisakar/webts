@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 interface Testimonial {
   id?: string | number;
   full_name: string;
-  created_at: string | Date;
+  review_date: string | Date;
   review: string;
   urlinfo: {
     url_title: string;
@@ -48,7 +48,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({ testimonial }) => {
               {testimonial.full_name}
             </span>
             <span className="testimonials-date text-xs text-muted font-semibold">
-              {format(new Date(testimonial.created_at), 'dd MMM yyyy')}
+              {format(new Date(testimonial.review_date), 'dd MMM yyyy')}
             </span>
           </div>
         </div>
