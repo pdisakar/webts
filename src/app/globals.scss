@@ -59,7 +59,7 @@ article {
     @apply w-full overflow-x-auto mb-5 ;
 
     table {
-      @apply w-full border border-primary border-collapse min-w-[600px] mb-4 mt-2;
+      @apply w-full border border-primary/20 border-collapse min-w-[450px] mb-4 mt-2;
 
       tr:nth-child(odd) {
         @apply bg-primary/5;
@@ -67,7 +67,7 @@ article {
 
       th,
       td {
-        @apply border border-primary/50 p-[10px];
+        @apply border border-primary/20 p-[10px];
       }
 
       th {
