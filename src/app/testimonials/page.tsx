@@ -6,7 +6,7 @@ import TestimonialList from '@/components/TestimonialList/TestimonialList';
 export interface Testimonial {
   id?: string | number;
   full_name: string;
-  created_at: string | Date;
+  review_date: string | Date;
   review: string;
   urlinfo: {
     url_title: string;
