@@ -19,7 +19,7 @@ const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
   return (
     <div className="breadcrumb-container">
       <nav aria-label="breadcrumb">
-        <ul className="flex items-center text-[13px] font-semibold text-muted [&>li:last-child]:text-primary">
+        <ul className="flex flex-wrap items-center text-[13px] font-semibold text-muted [&>li:last-child]:text-primary">
           <li className="flex items-center">
             <Link href="/">Home</Link>
             <span className='px-1'>/</span>

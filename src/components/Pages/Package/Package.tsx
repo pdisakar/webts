@@ -177,7 +177,7 @@ const Package: React.FC<PackageProps> = ({ packageData, breadcrumb }) => {
           </div>
         </div>
         <div className="grid lg:grid-cols-12 gap-6">
-          <div className="page-left lg:col-span-8">
+          <div className="page-left lg:col-span-8 min-w-0">
             {packageData.package_abstract && (
               <div className="abstract">
                 <div className="common-module">
