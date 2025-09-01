@@ -5,7 +5,7 @@ import PrimaryButton from '../Buttons/PrimaryButton'; // Adjust the path if need
 interface Testimonial {
   id: string | number;
   full_name: string;
-  created_at: string | Date;
+  review_date: string | Date;
   review: string;
   urlinfo: {
     url_title: string;
