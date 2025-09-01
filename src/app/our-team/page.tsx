@@ -114,28 +114,29 @@ const Page = async () => {
                           key={member.id}
                           className="p-2 border border-primary/10 shadow-custom-shadow rounded-md">
                           <Link
-                            className="image-slot before:aspect-[469/469] min-w-[250px] max-w-[250px]"
                             href={`our-team/${member.urlinfo.url_slug}`}
                             aria-label={`View profile of ${member.full_name}`}>
-                            <Image
-                              src={IMAGE_URL + member.avatar.full_path}
-                              alt={member.full_name}
-                              width={640}
-                              height={648}
-                              title={member.full_name}
-                              className="object-cover rounded-[4px]"
-                              priority
-                              sizes="(max-width: 469px) 100vw, (max-width: 469px) 50vw, 469px"
-                            />
+                            <figure className="image-slot before:aspect-[469/469] min-w-[250px] max-w-[250px]">
+                              <Image
+                                src={IMAGE_URL + member.avatar.full_path}
+                                alt={member.full_name}
+                                width={640}
+                                height={648}
+                                title={member.full_name}
+                                className="object-cover rounded-[4px]"
+                                priority
+                                sizes="(max-width: 469px) 100vw, (max-width: 469px) 50vw, 469px"
+                              />
+                            </figure>
+                            <figcaption className="about-member text-center px-3 pt-3 pb-4">
+                              <h4 className="text-lg font-bold text-headings capitalize">
+                                {member.full_name}
+                              </h4>
+                              <p className="mt-1 text-sm font-semibold text-muted capitalize">
+                                {member.position}
+                              </p>
+                            </figcaption>
                           </Link>
-                          <div className="about-member text-center px-3 pt-3 pb-4">
-                            <h4 className="text-lg font-bold text-headings capitalize">
-                              {member.full_name}
-                            </h4>
-                            <p className="mt-1 text-sm font-semibold text-muted capitalize">
-                              {member.position}
-                            </p>
-                          </div>
                         </li>
                       ))}
                     </ul>

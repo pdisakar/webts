@@ -49,7 +49,7 @@ const MobileMenuItem: React.FC<{
   const hasChildren = item.children && item.children.length > 0;
 
   const baseItemClasses =
-    'w-full py-1 text-left font-semibold text-headings hover:text-primary rounded-md';
+    'w-full py-1 text-left font-semibold text-headings hover:text-primary';
 
   const handleLinkClick = () => {
     closeMenu();
@@ -165,8 +165,8 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
             src="/logo.png"
             alt="Logo"
             title="logo"
-            width={70}
-            height={18}
+            width={88}
+            height={110}
             className="logo"
           />
         </Link>

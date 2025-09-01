@@ -69,6 +69,16 @@ export async function getAllMembers() {
     .catch(err => err);
 }
 
+// to get indivisual team member data
+export async function getTeamMember(query: string | number): ApiResponse {
+  return await client
+    .get(`/membercontent/${query}`)
+    .then(async res => {
+      return res;
+    })
+    .catch(err => err);
+}
+
 // to get all testimonials
 export async function getAllTestimonials(limit: number = 6): Promise<any> {
   try {
