@@ -24,11 +24,11 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ optionalData }) => {
            (max-width: 1280px) 90vw,
            1856px"
         />
-        <figcaption className="absolute top-1/2 left-1/2 z-10 text-center transform -translate-x-1/2 -translate-y-1/2">
+        <figcaption className="absolute top-1/2 left-1/2 z-10 text-center transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px]">
           <span className="text-[15px] font-semibold text-white flex items-center justify-center mb-1 gap-2">
             Experience the thrill of nature
           </span>
-          <h2 className="text-[clamp(28px,5vw,52px)] text-white font-bold text-center">
+          <h2 className="text-[clamp(32px,5vw,52px)] text-white font-black text-center">
             Embark on Your Next Great Adventure Here
           </h2>
         </figcaption>
