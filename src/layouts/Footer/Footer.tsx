@@ -39,7 +39,8 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
   return (
     <div className="footer-body">
       <Affiliations />
-      <footer className="footer pb-0 common-box bg-footer-color">
+      <footer
+        className="footer pb-0 common-box bg-footer-color relative after:content-[''] after:absolute after:inset-0 after:bg-pathpattern after:opacity-5">
         <div className="container">
           <div className="main-footer">
             <ul className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

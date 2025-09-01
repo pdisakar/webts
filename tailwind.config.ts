@@ -26,6 +26,7 @@ export default {
         incorrect: "url('/icons/incorrect.svg')",
         worldmap: "url('/icons/worldmap.svg')",
         dottedline: "url('/icons/dottedline.svg')",
+        pathpattern: "url('/icons/pathpattern.svg')",
       },
     },
     colors: {
