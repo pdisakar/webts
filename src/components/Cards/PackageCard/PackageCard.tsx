@@ -55,9 +55,12 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg }) => {
                 fill="currentColor"
               />
             </svg>
-            <span className="text-sm leading-[1] text-muted font-light">
-              ({pkg.total_testimonials.toString().padStart(2, '0')})
-            </span>
+
+            {pkg.total_testimonials > 0 && (
+              <span className="text-sm leading-[1] text-muted font-light">
+                ({pkg.total_testimonials.toString().padStart(2, '0')})
+              </span>
+            )}
           </div>
 
           <Link
