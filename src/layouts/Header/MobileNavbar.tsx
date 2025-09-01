@@ -160,6 +160,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
       <nav className="relative z-50 flex items-center justify-between p-4 bg-page-bg">
         <Link
           href="/"
+          className='max-w-[60px]'
           onClick={() => setIsMenuOpen(false)}>
           <Image
             src="/logo.png"
