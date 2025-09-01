@@ -4,7 +4,7 @@ import BlogList from '@/components/BlogList/BlogList';
 import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 
 const IMAGE_URL = process.env.IMAGE_URL || '';
-const BASE_URL = process.env.BASE_URL || '';
+const CANONICAL_BASE = process.env.CANONICAL_BASE || '';
 
 export interface BlogAuthor {
   name?: string;
@@ -29,12 +29,14 @@ export interface Blog {
 }
 
 export interface PageContentMeta {
-  meta_title: string;
-  meta_description: string;
+  meta_title?: string;
+  meta_description?: string;
 }
 
 export interface PageContent {
-  meta: PageContentMeta;
+  page_title: string;
+  page_description?: string;
+  meta?: PageContentMeta;
   urlinfo: UrlInfo;
   banner?: FeaturedImage;
   [key: string]: any;
@@ -46,6 +48,41 @@ export interface BlogPageData {
   [key: string]: any;
 }
 
+export async function generateMetadata(): Promise<any> {
+  const response = await getBlogPage();
+  const data: BlogPageData = response.data.data;
+
+  const metaTitle =
+    data.pagecontent?.meta?.meta_title ||
+    data.pagecontent?.page_title ||
+    'Our Blog';
+  const metaDescription =
+    data.pagecontent?.meta?.meta_description ||
+    data.pagecontent?.page_description ||
+    '';
+
+  const canonicalUrl = `${CANONICAL_BASE}/blog`;
+
+  return {
+    title: metaTitle,
+    description: metaDescription,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription,
+      url: canonicalUrl,
+      ...(data.pagecontent?.banner && {
+        images: [
+          {
+            url: IMAGE_URL + data.pagecontent.banner.full_path,
+            width: 1200,
+            height: 600,
+          },
+        ],
+      }),
+    },
+  };
+}
 
 const Page: React.FC = async () => {
   const response = await getBlogPage();
@@ -70,7 +107,11 @@ const Page: React.FC = async () => {
               <BreadCrumb breadcrumb={breadcrumb} />
             </div>
             <div className="title text-center">
-              <h1>Our Blog</h1>
+              <h1
+                dangerouslySetInnerHTML={{
+                  __html: data.pagecontent.page_title || 'Our Blog',
+                }}
+              />
             </div>
           </div>
           <BlogList initialPosts={initialData} />
