@@ -6,7 +6,7 @@ import Article from '@/components/Pages/Article/Article';
 
 import type { Metadata } from 'next';
 
-const siteUrl = `${process.env.CANONICAL_BASE}/`;
+const CANONICAL_BASE = process.env.CANONICAL_BASE || '';
 
 interface PageParams {
   params: Promise<{ slug: string }>;
@@ -35,12 +35,12 @@ export async function generateMetadata({
     title: meta?.meta_title || 'Untitled',
     description: meta?.meta_description || '',
     alternates: {
-      canonical: `${siteUrl}${slug}`,
+      canonical: `${CANONICAL_BASE}/${slug}`,
     },
     openGraph: {
       title: meta?.meta_title || 'Untitled',
       description: meta?.meta_description || '',
-      url: `${siteUrl}${slug}`,
+      url: `${CANONICAL_BASE}${slug}`,
       ...(banner && {
         images: [
           {
