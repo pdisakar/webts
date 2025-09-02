@@ -1,4 +1,3 @@
-// app/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { getArticle, getStaticRoutes } from '@/services/network_requests';
 import Package from '@/components/Pages/Package/Package';
@@ -11,9 +10,8 @@ const CANONICAL_BASE = process.env.CANONICAL_BASE || '';
 const IMAGE_URL = process.env.IMAGE_URL || '';
 
 interface PageParams {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
-
 
 export async function generateStaticParams() {
   const data = await getStaticRoutes();
@@ -60,7 +58,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const { slug } = params;
+  // Await the params to get the slug
+  const { slug } = await params;
 
   let articleResponse;
   try {
@@ -100,7 +99,7 @@ export async function generateMetadata({
 }
 
 export default async function Slug({ params }: PageParams) {
-  const { slug } = params;
+  const { slug } = await params;
 
   let data;
   try {
