@@ -70,6 +70,8 @@ export async function generateMetadata({ params }: ParamsPromise) {
   };
 }
 
+export const revalidate = 60;
+
 const Page = async ({ params }: ParamsPromise) => {
   const { slug } = await params;
 
