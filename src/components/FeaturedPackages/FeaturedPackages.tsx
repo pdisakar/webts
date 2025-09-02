@@ -1,21 +1,7 @@
 import React from 'react';
 import PackageCard from '../Cards/PackageCard/PackageCard';
 import PrimaryButton from '../Buttons/PrimaryButton';
-
-interface FeaturedPackage {
-  package_title: string;
-  package_duration: number;
-  total_testimonials: number;
-  group_default_price: number;
-  urlinfo: { url_slug: string };
-  featured: { full_path: string };
-  [key: string]: any;
-}
-
-interface FeaturedPackagesProps {
-  limit: number;
-  data: FeaturedPackage[];
-}
+import { FeaturedPackagesProps } from '@/lib/types';
 
 const FeaturedPackages: React.FC<FeaturedPackagesProps> = ({ limit, data }) => {
   const currentYear = new Date().getFullYear() % 100;

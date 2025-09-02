@@ -4,42 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SmartSearch from '@/components/SmartSearch/SmartSearch';
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
-
-interface MenuItem {
-  id: string | number;
-  item_title: string;
-  item_slug?: string;
-  url_segment?: string;
-  children?: MenuItem[];
-}
-
-interface GlobalDataContent {
-  notification?: string;
-  main_menu?: {
-    menu: MenuItem[];
-  };
-  mobile?: string;
-  phone?: string;
-  email?: string;
-  address?: string;
-}
-
-interface OptionalDataContent {
-  [key: string]: any;
-}
-
-interface GlobalData {
-  data: GlobalDataContent;
-}
-
-interface OptionalData {
-  data: OptionalDataContent;
-}
-
-interface MobileNavbarProps {
-  globalData: GlobalData;
-  optionalData: OptionalData;
-}
+import { MobileNavbarProps, MenuItem } from '@/lib/types';
 const MobileMenuItem: React.FC<{
   item: MenuItem;
   closeMenu: () => void;

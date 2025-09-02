@@ -2,22 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
-
-
-interface GlobalDataContent {
-  mobile?: string;
-  phone?: string;
-  email?: string;
-  address?: string;
-}
-
-interface GlobalData {
-  data: GlobalDataContent;
-}
-
-interface SidePanelProps {
-  globalData: GlobalData;
-}
+import { SidePanelProps } from '@/lib/types';
 
 const SidePanel: React.FC<SidePanelProps> = ({ globalData }) => {
   const [isOpen, setIsOpen] = useState(false);

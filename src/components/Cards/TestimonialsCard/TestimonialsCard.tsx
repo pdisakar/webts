@@ -1,19 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-
-interface Testimonial {
-  id?: string | number;
-  full_name: string;
-  review_date: string | Date;
-  review: string;
-  urlinfo: {
-    url_title: string;
-  };
-}
-
-interface TestimonialsCardProps {
-  testimonial: Testimonial;
-}
+import { TestimonialsCardProps } from '@/lib/types';
 
 const TestimonialsCard: React.FC<TestimonialsCardProps> = ({ testimonial }) => {
   return (
@@ -29,12 +16,12 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({ testimonial }) => {
           />
         </svg>
         <h3 className="text-headings text-xl font-semibold leading-[130%] pb-4">
-          {testimonial.urlinfo.url_title}
+          {testimonial.urlinfo?.url_title}
         </h3>
 
         <article
           className="custom-scrollbar"
-          dangerouslySetInnerHTML={{ __html: testimonial.review }}
+          dangerouslySetInnerHTML={{ __html: testimonial.review || '' }}
         />
       </div>
       <div className="about-author mt-6 pt-6 border-t border-border">
@@ -48,7 +35,7 @@ const TestimonialsCard: React.FC<TestimonialsCardProps> = ({ testimonial }) => {
               {testimonial.full_name}
             </span>
             <span className="testimonials-date text-xs text-muted font-semibold">
-              {format(new Date(testimonial.review_date), 'dd MMM yyyy')}
+              {testimonial.review_date ? format(new Date(testimonial.review_date), 'dd MMM yyyy') : ''}
             </span>
           </div>
         </div>

@@ -1,16 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import { BreadCrumbProps } from '@/lib/types';
 
-interface BreadcrumbItem {
-  title: string;
-  slug: string;
-}
-
-interface BreadcrumbProps {
-  breadcrumb: BreadcrumbItem[][];
-}
-
-const BreadCrumb = ({ breadcrumb }: BreadcrumbProps) => {
+const BreadCrumb = ({ breadcrumb }: BreadCrumbProps) => {
   if (!breadcrumb || !breadcrumb[0] || breadcrumb[0].length === 0) return null;
 
   const breadcrumbItems = breadcrumb[0];

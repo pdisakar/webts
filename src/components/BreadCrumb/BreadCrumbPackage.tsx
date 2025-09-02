@@ -1,15 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-
-interface BreadcrumbItem {
-  title: string;
-  slug: string;
-}
-
-interface BreadCrumbPackageProps {
-  breadcrumb: { [key: string]: BreadcrumbItem[] };
-  currentpage: string;
-}
+import { BreadCrumbPackageProps } from '@/lib/types';
 
 const BreadCrumbPackage = ({
   breadcrumb,

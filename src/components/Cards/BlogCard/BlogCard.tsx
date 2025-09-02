@@ -3,24 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { IMAGE_URL } from '@/lib/constants';
-
-interface BlogAuthor {
-  name?: string;
-}
-
-interface Blog {
-  id: string | number;
-  title: string;
-  urlinfo: { url_slug: string };
-  featured?: { full_path: string };
-  authors?: BlogAuthor[];
-  blog_date: string | Date;
-  [key: string]: any;
-}
-
-interface BlogCardProps {
-  blog: Blog;
-}
+import { BlogCardProps } from '@/lib/types';
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
   return (
@@ -28,7 +11,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
       <div className="item grid grid-cols-1 lg:grid-cols-5 gap-5 items-center overflow-hidden group">
         <figure className="col-span-1 lg:col-span-2 relative image-slot w-full aspect-[760/640] rounded-[4px] overflow-hidden">
           <Link
-            href={`blog/${blog.urlinfo.url_slug}`}
+            href={`blog/${blog.urlinfo?.url_slug || ''}`}
             aria-label={`View image for ${blog.title}`}
             className="block w-full h-full">
             {blog.featured?.full_path ? (
@@ -50,7 +33,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
 
         <figcaption className="col-span-1 lg:col-span-3 w-full">
           <Link
-            href={`blog/${blog.urlinfo.url_slug}`}
+            href={`blog/${blog.urlinfo?.url_slug || ''}`}
             aria-label={`View details for ${blog.title}`}
             className="block">
             <h3 className="text-xl text-headings font-black leading-[160%] hover:text-primary hover:underline transition-all duration-150 ease-linear">
@@ -59,10 +42,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
           </Link>
           <div className="about-blog flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
             <span className="blog-author capitalize text-primary font-semibold">
-              {blog.authors?.[0]?.name || 'Unknown Author'}
+              {blog.authors?.[0]?.name || blog.author?.name || 'Unknown Author'}
             </span>
             <span className="blog-date capitalize font-semibold">
-              {format(new Date(blog.blog_date), 'dd MMM yyyy')}
+              {blog.blog_date ? format(new Date(blog.blog_date), 'dd MMM yyyy') : ''}
             </span>
           </div>
         </figcaption>

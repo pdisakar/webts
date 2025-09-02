@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,9 +23,25 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/[slug]/page.tsx", "src/components/Pages/Category/Category.tsx", "src/components/Accordion/Accordion.tsx", "src/components/Pages/Package/Package.tsx", "src/app/blog/page.jsx", "src/app/blog/[slug]/page.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "src/app/[slug]/page.tsx",
+    "src/app/blog/[slug]/page.tsx",
+    "src/app/blog/page.jsx",
+    "src/components/Accordion/Accordion.tsx",
+    "src/components/Pages/Category/Category.tsx",
+    "src/components/Pages/Package/Package.tsx",
+    "./.next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,21 +1,7 @@
 import React from 'react';
 import TestimonialsCard from '../Cards/TestimonialsCard/TestimonialsCard';
 import PrimaryButton from '../Buttons/PrimaryButton'; // Adjust the path if needed
-
-interface Testimonial {
-  id: string | number;
-  full_name: string;
-  review_date: string | Date;
-  review: string;
-  urlinfo: {
-    url_title: string;
-  };
-}
-
-interface FeaturedTestimonialsProps {
-  limit: number;
-  data: Testimonial[];
-}
+import { FeaturedTestimonialsProps } from '@/lib/types';
 
 const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({
   limit,

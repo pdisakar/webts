@@ -3,26 +3,7 @@ import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 import CategoryCard from '@/components/Cards/CategoryCard/CategoryCard';
 import PackageCard from '@/components/Cards/PackageCard/PackageCard';
 import React from 'react';
-
-interface CategoryData {
-  banner?: BannerData;
-  title: string;
-  description?: string;
-  children?: Array<any>;
-  packages?: Array<any>;
-}
-
-interface BreadcrumbItem {
-  title: string;
-  slug: string;
-}
-
-interface breadcrumbData extends Array<Array<BreadcrumbItem>> {}
-
-interface CategoryProps {
-  categoryData: CategoryData;
-  breadcrumb: breadcrumbData;
-}
+import { CategoryProps } from '@/lib/types';
 
 export default function Category({ categoryData, breadcrumb }: CategoryProps) {
   return (
@@ -38,7 +19,7 @@ export default function Category({ categoryData, breadcrumb }: CategoryProps) {
               </div>
               <div className="title text-center">
                 <h1
-                  dangerouslySetInnerHTML={{ __html: categoryData.title }}></h1>
+                  dangerouslySetInnerHTML={{ __html: categoryData.title || '' }}></h1>
               </div>
             </div>
 
@@ -64,7 +45,7 @@ export default function Category({ categoryData, breadcrumb }: CategoryProps) {
                 </div>
               </div>
               <ul className="package-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                {categoryData.children.map((category, index) => (
+                {categoryData.children.map((category: any, index: number) => (
                   <CategoryCard
                     key={index}
                     category={category}
@@ -89,7 +70,7 @@ export default function Category({ categoryData, breadcrumb }: CategoryProps) {
               </div>
 
               <div className="package-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                {categoryData.packages.map((pkg, index) => (
+                {categoryData.packages.map((pkg: any, index: number) => (
                   <PackageCard
                     key={index}
                     pkg={pkg}

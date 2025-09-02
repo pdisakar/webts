@@ -5,42 +5,14 @@ import Link from 'next/link';
 import cards from '../../../public/CardsWeAccept/cards.png';
 import SocialMedia from '@/components/SocialMedia/SocialMedia';
 import Affiliations from '@/components/Affiliations/Affiliations';
-
-interface FooterMenuChild {
-  id: string | number;
-  item_title: string;
-  url_segment: string;
-  [key: string]: any;
-}
-
-interface FooterMenuSection {
-  id: string | number;
-  item_title: string;
-  children?: FooterMenuChild[];
-  [key: string]: any;
-}
-
-interface GlobalData {
-  phone?: string;
-  company_name?: string;
-  address?: string;
-  email?: string;
-  footer_menu?: {
-    menu?: FooterMenuSection[];
-  };
-  [key: string]: any;
-}
-
-interface FooterProps {
-  globalData?: GlobalData;
-}
+import { FooterProps, FooterMenuSection, FooterMenuChild } from '@/lib/types';
 
 const Footer: React.FC<FooterProps> = ({ globalData }) => {
   return (
     <div className="footer-body">
       <Affiliations />
       <footer
-        className="footer pb-0 common-box bg-footer-color relative after:content-[''] after:absolute after:inset-0 after:bg-pathpattern after:opacity-5">
+        className="footer pb-0 common-box bg-footer-color">
         <div className="container">
           <div className="main-footer">
             <ul className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

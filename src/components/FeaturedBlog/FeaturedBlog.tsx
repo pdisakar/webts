@@ -4,27 +4,9 @@ import PrimaryButton from '../Buttons/PrimaryButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
+import { FeaturedBlogProps } from '@/lib/types';
 
 const IMAGE_URL = process.env.IMAGE_URL || '';
-
-interface BlogAuthor {
-  name?: string;
-}
-
-interface Blog {
-  id: string | number;
-  title: string;
-  urlinfo: { url_slug: string };
-  featured?: { full_path: string };
-  authors?: BlogAuthor[];
-  blog_date: string | Date;
-  [key: string]: any;
-}
-
-interface FeaturedBlogProps {
-  limit: number;
-  data?: Blog[];
-}
 
 const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ limit, data }) => {
   if (!data || data.length === 0) return null;
@@ -53,7 +35,7 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ limit, data }) => {
               <figure className="card-img w-full">
                 <Link
                   className="image-slot rounded-lg before:aspect-[628/417] w-full"
-                  href={`blog/${firstBlog.urlinfo.url_slug}`}
+                  href={`blog/${firstBlog.urlinfo?.url_slug || ''}`}
                   aria-label={`View image for ${firstBlog.title}`}>
                   <Image
                     src={IMAGE_URL + firstBlog?.featured?.full_path}
@@ -70,17 +52,17 @@ const FeaturedBlog: React.FC<FeaturedBlogProps> = ({ limit, data }) => {
               <figcaption className="absolute bottom-0 left-0 w-full z-10 p-6 bg-gradient-to-t from-black/80 to-transparent text-page-bg rounded-b-lg">
                 <Link
                   className="package-title text-2xl font-bold group-hover:underline transition-all duration-150 leading-[160%]"
-                  href={`blog/${firstBlog.urlinfo.url_slug}`}
+                  href={`blog/${firstBlog.urlinfo?.url_slug || ''}`}
                   aria-label={`View details for ${firstBlog.title}`}>
                   <h3 className="">{firstBlog.title}</h3>
                 </Link>
 
                 <div className="about-blog flex items-center gap-3 mt-[10px]">
                   <span className="blog-author capitalize font-semibold">
-                    {firstBlog.authors?.[0]?.name || 'Unknown Author'}
+                    {firstBlog.authors?.[0]?.name || firstBlog.author?.name || 'Unknown Author'}
                   </span>
                   <span className="blog-date capitalize font-semibold">
-                    {format(new Date(firstBlog.blog_date), 'dd MMM yyyy')}
+                    {firstBlog.blog_date ? format(new Date(firstBlog.blog_date), 'dd MMM yyyy') : ''}
                   </span>
                 </div>
               </figcaption>

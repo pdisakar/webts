@@ -2,22 +2,9 @@ import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import PackageButton from '@/components/Buttons/PackageButton';
+import { PackageCardProps } from '@/lib/types';
 
 const IMAGE_URL = process.env.IMAGE_URL;
-
-interface FeaturedPackage {
-  package_title: string;
-  package_duration: number;
-  total_testimonials: number;
-  group_default_price: number;
-  urlinfo: { url_slug: string };
-  featured: { full_path: string };
-  [key: string]: any;
-}
-
-interface PackageCardProps {
-  pkg: FeaturedPackage;
-}
 
 const PackageCard: React.FC<PackageCardProps> = ({ pkg }) => {
   return (

@@ -1,21 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import Link from 'next/link';
-
-export interface Package {
-  id: string | number;
-  title: string;
-  slug: string;
-}
-
-export interface OptionalData {
-  package?: Package[];
-  [key: string]: any;
-}
-
-interface HomeSearchProps {
-  optionalData: OptionalData;
-}
+import { HomeSearchProps, Package } from '@/lib/types';
 
 const HomeSearch: React.FC<HomeSearchProps> = ({ optionalData }) => {
   const [query, setQuery] = useState('');

@@ -1,30 +1,11 @@
 'use client';
 import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
 import Link from 'next/link';
-
-interface PackageItem {
-  id: string | number;
-  title: string;
-  slug: string;
-}
-
-interface OptionalDataContent {
-  package?: PackageItem[];
-  [key: string]: any;
-}
-
-interface OptionalData {
-  data: OptionalDataContent;
-}
-
-interface SmartSearchProps {
-  optionalData: OptionalData;
-  onClose?: () => void;
-}
+import { SmartSearchProps, Package } from '@/lib/types';
 
 const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
   const [query, setQuery] = useState('');
-  const [filtered, setFiltered] = useState<PackageItem[]>([]);
+  const [filtered, setFiltered] = useState<Package[]>([]);
   const [searching, setSearching] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
@@ -57,7 +38,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ optionalData, onClose }) => {
       const searchableData = optionalData?.data?.package || [];
       const lowerQ = q.trim().toLowerCase();
       const results = searchableData
-        .filter(pkg => pkg.title.toLowerCase().includes(lowerQ))
+        .filter((pkg: Package) => pkg.title.toLowerCase().includes(lowerQ))
         .slice(0, 10);
 
       setFiltered(results);
