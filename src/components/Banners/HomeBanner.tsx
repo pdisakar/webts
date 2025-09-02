@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import HomeSearch from '../HomeSearch/HomeSearch';
+import dynamic from 'next/dynamic';
+const HomeSearch = dynamic(() => import('../HomeSearch/HomeSearch'));
+
 
 interface HomeBannerProps {
   optionalData: {

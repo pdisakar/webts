@@ -58,7 +58,6 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  // Await the params to get the slug
   const { slug } = await params;
 
   let articleResponse;
