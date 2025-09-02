@@ -14,10 +14,7 @@ interface PageParams {
   params: { slug: string };
 }
 
-// --- ISR config ---
-export const revalidate = 60; // Regenerate every 60s
 
-// --- Static paths with exclusions ---
 export async function generateStaticParams() {
   const data = await getStaticRoutes();
 
@@ -60,7 +57,6 @@ export async function generateStaticParams() {
     .map(({ slug }) => ({ slug }));
 }
 
-// --- Metadata ---
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
@@ -103,7 +99,6 @@ export async function generateMetadata({
   };
 }
 
-// --- Page component ---
 export default async function Slug({ params }: PageParams) {
   const { slug } = params;
 
