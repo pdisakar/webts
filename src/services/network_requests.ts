@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import client from './network';
 import { AxiosResponse } from 'axios';
 
@@ -88,3 +89,13 @@ export async function getAllTestimonials(limit: number = 6): Promise<any> {
     return Promise.reject(err);
   }
 }
+
+export const getGlobalDataCached = cache(getGlobalData);
+export const getOptionsDataCached = cache(getOptionsData);
+export const getHomeDataCached = cache(getHomeData);
+export const getArticleCached = cache(getArticle);
+export const getBlogPageCached = cache(getBlogPage);
+export const getBlogBySlugCached = cache(getBlogBySlug);
+export const getAllMembersCached = cache(getAllMembers as any);
+export const getTeamMemberCached = cache(getTeamMember);
+export const getAllTestimonialsCached = cache(getAllTestimonials as any);
