@@ -1,5 +1,6 @@
+// app/[slug]/page.tsx
 import { notFound } from 'next/navigation';
-import { getArticle } from '@/services/network_requests';
+import { getArticle, getStaticRoutes } from '@/services/network_requests';
 import Package from '@/components/Pages/Package/Package';
 import Category from '@/components/Pages/Category/Category';
 import Article from '@/components/Pages/Article/Article';
@@ -7,15 +8,63 @@ import Article from '@/components/Pages/Article/Article';
 import type { Metadata } from 'next';
 
 const CANONICAL_BASE = process.env.CANONICAL_BASE || '';
+const IMAGE_URL = process.env.IMAGE_URL || '';
 
 interface PageParams {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
+// --- ISR config ---
+export const revalidate = 60; // Regenerate every 60s
+
+// --- Static paths with exclusions ---
+export async function generateStaticParams() {
+  const data = await getStaticRoutes();
+
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  const excludedSlugs = [
+    'blog',
+    'booking',
+    'trip-booking',
+    'author',
+    'contact-us',
+    'checkout',
+    'plan-your-trip',
+    'about-us',
+    'customize-trip',
+    'nabil-payment-cancelled',
+    'nabil-payment-complete',
+    'nabil-payment-declined',
+    'online-booking',
+    'online-payment',
+    'package',
+    'review',
+    'story',
+    'team',
+    'thank-you',
+    'thank-you-inquiry',
+    'sitemap',
+    'reviews',
+    'luxury-trekking',
+    'travel-guide',
+    'our-teams',
+    'our-team',
+    'authors',
+  ];
+
+  return data
+    .filter(({ slug }) => !excludedSlugs.includes(slug))
+    .map(({ slug }) => ({ slug }));
+}
+
+// --- Metadata ---
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
 
   let articleResponse;
   try {
@@ -40,11 +89,11 @@ export async function generateMetadata({
     openGraph: {
       title: meta?.meta_title || 'Untitled',
       description: meta?.meta_description || '',
-      url: `${CANONICAL_BASE}${slug}`,
+      url: `${CANONICAL_BASE}/${slug}`,
       ...(banner && {
         images: [
           {
-            url: `${process.env.IMAGE_URL}${banner}`,
+            url: `${IMAGE_URL}${banner}`,
             width: 1200,
             height: 600,
           },
@@ -54,8 +103,9 @@ export async function generateMetadata({
   };
 }
 
+// --- Page component ---
 export default async function Slug({ params }: PageParams) {
-  const { slug } = await params;
+  const { slug } = params;
 
   let data;
   try {

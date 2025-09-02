@@ -90,6 +90,18 @@ export async function getAllTestimonials(limit: number = 6): Promise<any> {
   }
 }
 
+
+export async function getStaticRoutes() {
+  return await client
+    .get(`/content`)
+    .then(async res => {
+      return res;
+    })
+    .catch(err => {
+      return undefined;
+    });
+}
+
 export const getGlobalDataCached = cache(getGlobalData);
 export const getOptionsDataCached = cache(getOptionsData);
 export const getHomeDataCached = cache(getHomeData);
