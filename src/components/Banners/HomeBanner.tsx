@@ -2,10 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
-const HomeSearchLazy = dynamic(() => import('../HomeSearch/HomeSearch'), {
-  ssr: false,
-  loading: () => null,
-});
+const HomeSearchLazy = dynamic(() => import('../HomeSearch/HomeSearch'));
 
 interface HomeBannerProps {
   optionalData: {
