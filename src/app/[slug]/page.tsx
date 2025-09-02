@@ -1,31 +1,46 @@
 import { notFound } from 'next/navigation';
-import { getArticle } from '@/services/network_requests';
+import type { Metadata } from 'next';
+
 import Package from '@/components/Pages/Package/Package';
 import Category from '@/components/Pages/Category/Category';
 import Article from '@/components/Pages/Article/Article';
 
-import type { Metadata } from 'next';
+const API_BASE =
+  process.env.NODE_ENV === 'production'
+    ? process.env.PRODUCTION_SERVER
+    : process.env.DEVELOPMENT_SERVER;
+const SITE_KEY = process.env.SITE_KEY;
+
+export const revalidate = 300;
 
 const CANONICAL_BASE = process.env.CANONICAL_BASE || '';
+const IMAGE_URL = process.env.IMAGE_URL || '';
 
 interface PageParams {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
-export async function generateMetadata({
-  params,
-}: PageParams): Promise<Metadata> {
-  const { slug } = await params;
+async function fetchArticle(slug: string) {
+  const res = await fetch(`${API_BASE}/content/${slug}`, {
+    next: { revalidate: 300, tags: ['article', `content:${slug}`] },
+    headers: SITE_KEY ? { siteKey: SITE_KEY } : undefined,
+  });
 
-  let articleResponse;
-  try {
-    articleResponse = await getArticle(slug);
-  } catch (err: any) {
-    if (err.response?.status === 404) return notFound();
-    throw err;
+  if (res.status === 404) return null;
+  if (!res.ok) {
+    throw new Error(`Failed to fetch article: ${res.status}`);
   }
 
-  const data = articleResponse?.data?.data;
+  const json = await res.json();
+  return json?.data?.data ?? null;
+}
+
+export async function generateMetadata(
+  { params }: PageParams
+): Promise<Metadata> {
+  const { slug } = params;
+
+  const data = await fetchArticle(slug);
   if (!data) return notFound();
 
   const meta = data.content?.meta;
@@ -40,11 +55,11 @@ export async function generateMetadata({
     openGraph: {
       title: meta?.meta_title || 'Untitled',
       description: meta?.meta_description || '',
-      url: `${CANONICAL_BASE}${slug}`,
+      url: `${CANONICAL_BASE}/${slug}`,
       ...(banner && {
         images: [
           {
-            url: `${process.env.IMAGE_URL}${banner}`,
+            url: `${IMAGE_URL}${banner}`,
             width: 1200,
             height: 600,
           },
@@ -55,16 +70,10 @@ export async function generateMetadata({
 }
 
 export default async function Slug({ params }: PageParams) {
-  const { slug } = await params;
+  const { slug } = params;
 
-  let data;
-  try {
-    const articleResponse = await getArticle(slug);
-    data = articleResponse?.data?.data;
-    if (!data) notFound();
-  } catch (err) {
-    notFound();
-  }
+  const data = await fetchArticle(slug);
+  if (!data) notFound();
 
   switch (data.page_type) {
     case 'category':

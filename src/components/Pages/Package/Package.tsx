@@ -1,13 +1,14 @@
-import Accordion from '@/components/Accordion/Accordion';
 import PageBanner from '@/components/Banners/PageBanner';
 import BreadCrumbPackage from '@/components/BreadCrumb/BreadCrumbPackage';
 import TestimonialsCard from '@/components/Cards/TestimonialsCard/TestimonialsCard';
-import FixedDeparture from '@/components/FixedDeparture/FixedDeparture';
-
-import TripFaqs from '@/components/TripFaqs/TripFaqs';
-import TripGallery from '@/components/TripGallery/TripGallery';
 import Link from 'next/link';
 import React from 'react';
+import dynamic from 'next/dynamic';
+
+const Accordion = dynamic(() => import('@/components/Accordion/Accordion'));
+const FixedDeparture = dynamic(() => import('@/components/FixedDeparture/FixedDeparture'));
+const TripFaqs = dynamic(() => import('@/components/TripFaqs/TripFaqs'));
+const TripGallery = dynamic(() => import('@/components/TripGallery/TripGallery'));
 
 export interface Destination {
   title: string;

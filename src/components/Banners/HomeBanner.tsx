@@ -1,6 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
-import HomeSearch from '../HomeSearch/HomeSearch';
+import dynamic from 'next/dynamic';
+
+const HomeSearchLazy = dynamic(() => import('../HomeSearch/HomeSearch'), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface HomeBannerProps {
   optionalData: {
@@ -36,7 +41,7 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ optionalData }) => {
 
       <div className="home-search bg-secondary rounded-b-[20px] hidden lg:block">
         <div className="container py-6">
-          <HomeSearch optionalData={optionalData} />
+          <HomeSearchLazy optionalData={optionalData} />
         </div>
       </div>
     </section>
