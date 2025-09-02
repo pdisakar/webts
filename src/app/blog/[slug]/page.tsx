@@ -1,6 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getBlogBySlug } from '@/services/network_requests';
+import { getBlogBySlug, getStaticRoutes } from '@/services/network_requests';
 import PageBanner from '@/components/Banners/PageBanner';
 import { format } from 'date-fns';
 import BreadCrumbPackage from '@/components/BreadCrumb/BreadCrumbPackage';
@@ -70,7 +70,50 @@ export async function generateMetadata({ params }: ParamsPromise) {
   };
 }
 
-export const revalidate = 60;
+export const revalidate = 60; 
+
+
+export async function generateStaticParams() {
+  const data = await getStaticRoutes();
+
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  const excludedSlugs = [
+    'blog',
+    'booking',
+    'trip-booking',
+    'author',
+    'contact-us',
+    'checkout',
+    'plan-your-trip',
+    'about-us',
+    'customize-trip',
+    'nabil-payment-cancelled',
+    'nabil-payment-complete',
+    'nabil-payment-declined',
+    'online-booking',
+    'online-payment',
+    'package',
+    'review',
+    'story',
+    'team',
+    'thank-you',
+    'thank-you-inquiry',
+    'sitemap',
+    'reviews',
+    'luxury-trekking',
+    'travel-guide',
+    'our-teams',
+    'our-team',
+    'authors',
+  ];
+
+  return data
+    .filter(({ slug }) => !excludedSlugs.includes(slug))
+    .map(({ slug }) => ({ slug }));
+}
 
 const Page = async ({ params }: ParamsPromise) => {
   const { slug } = await params;
