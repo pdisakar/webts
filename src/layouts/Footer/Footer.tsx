@@ -29,11 +29,11 @@ const Footer: React.FC<FooterProps> = ({ globalData }) => {
                           <li
                             key={child.id}
                             className="text-[15px] font-medium text-white/80">
-                            <a
+                            <Link
                               href={`/${child.url_segment}`}
                               className="hover:text-white transition-colors">
                               {child.item_title}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
